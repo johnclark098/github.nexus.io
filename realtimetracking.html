@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="tablestyle.css">
+        <link rel="stylesheet" href="mapstyle.css">
+        <link rel="stylesheet" href="modalimage.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+ 
+    </head>
+ <body>
+
+    <div id="map" style="height: 590px; width:  1370px; top: auto;  "></div>
+
+    <div id=home>
+        <div id="over_map">
+            <div>
+                <span><label style="font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">Active Shipments: </label></span>
+                <span id="cars" style="font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">0</span>
+            </div>
+        </div>
+
+        <div id="over_map2">
+            <div>
+                <span><label style="font-size: 22px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">
+                    Check Container Status: </label></span>
+                <span > 
+                   
+                    <select id="shipmentPos" style="position: relative; width: 100px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; ">
+                  </select>    
+            
+                  </span>
+                  <button id=followShip class="btn" onclick="btnFollow()"><i class="fa fa-search"></i></button>
+            </div>
+     </div>
+   
+    </div>
+
+
+
+
+ <div id="map2" style="height: 590px; width:  1370px;top: auto;display: none;"  ></div>
+ 
+<div id = shipmentDetails style="display: none; " >
+
+    <a href="#" id = back><i id = back class="fa fa-arrow-circle-left" style="font-size:36px;   " ></i></a>
+    <label style="font-size: 22px;   
+    font-family: 
+    'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+    font-weight: bold;
+    position: relative;
+    margin-top: 10px;
+    left: 10px;">Tracking Container ID: 
+    </label><label id = "inventoryLabel" style="font-size: 22px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+    font-weight: bold;
+    position: relative;
+    margin-top: 10px;
+    left: 10px;"
+    ></label>
+ 
+    <button id = "cameraShow" class="buttonShipment"  style="position: relative; right:30px;top: 80px;"><span>Take Snapshots </span></button>
+    <button id = "inventoryShow" class="buttonShipment" style="position: relative; left:320px; top: 80px;"><span>Inventory </span></button>
+  
+    <div id=imageContents2>
+        <h2 style=" font-size: 22px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+        font-weight: bold; 
+        text-align: left; 
+        color: darkgreen;">Camera Snapshots</h2>
+        <button id = "startBtn" onclick="startCam()" class="buttonShipment2"style="position: relative; left:1060px;bottom: 70px;">Start</button>
+         <button id = "stopBtn"onclick="deletall()" class="buttonShipment2"style="position: relative; left:1060px;bottom: 70px;">Delete All</button>
+      <label id = lblsnapshot class= lblsnapshotclass style="font-size: 30px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+        font-weight: bold;
+        position: relative;
+        top: 40px;
+        left: 240px;" >Waiting for the pictures. . .</label> 
+        <div class="my-custom-scrollbar" id="style-4">
+                <table id = "List2" style="bottom:20px; position: relative;"  >
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+     </div>
+
+     
+    <div id=productContents >
+        <h2 align="center">Inventory Table</h2>
+        <ul id= "list">
+        </ul>
+        <input type="text" id="myInput4" type="text" onkeyup="filterTable4()" placeholder="Find data. . ." />
+          <div class="my-custom-scrollbar2" id="style-4">
+            <table  id="table4">
+                <thead>
+                    <tr class="header">
+                        <th onclick="sortTable4(0)" style="width:5%; ">ContainerID</th>
+                        <th onclick="sortTable4(1)" style="width:10%;">ProdID</th>
+                        <th onclick="sortTable4(2)" style="width:10%;">Description</th>
+                        <th onclick="sortTable4(3)" style="width:10%;">Latitude</th>
+                        <th onclick="sortTable4(4)" style="width:10%;">Longitude</th>
+ 
+                      </tr>
+                </thead>
+                <tbody>
+                 </tbody>
+                </table>
+            </div>
+     </div>
+
+    <div id=chartContents >
+        <canvas id="myChart"></canvas>
+     </div>
+ 
+     <div id=shockContents>
+        <h2 style=" font-size: 22px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+        font-weight: bold; 
+        text-align: left; 
+        color: darkgreen;">Shock Table</h2>
+        <ul id= "list">
+        </ul>
+        <input type="text" id="myInput5" type="text" onkeyup="filterTable5()" placeholder="Find data. . ." />
+          <div class="my-custom-scrollbar" id="style-4">
+      
+              <table  id="table5">
+                <thead>
+                    <tr class="header">
+                        <th onclick="sortTable5(0)" style="width:5%; ">Occurence</th>
+                        <th onclick="sortTable5(1)" style="width:10%;">Date</th>
+                        <th onclick="sortTable5(2)" style="width:10%;">Time</th>
+                        <th onclick="sortTable5(3)" style="width:10%;">Latitude</th>
+                        <th onclick="sortTable5(4)" style="width:10%;">Longitude</th>
+                        <th onclick="sortTable6(5)" style="width:10%;">Camera Snapshots</th> 
+                      </tr>
+                </thead>
+                <tbody>
+                 </tbody>
+                </table>
+            </div>
+     </div>
+     <div id=shipmentsContents  >
+        <h2 style=" font-size: 22px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+        font-weight: bold; 
+        text-align: left; 
+        color: darkgreen;">Monitoring Table</h2>
+        <ul id= "list">
+        </ul>
+        <input type="text" id="myInput3" type="text" onkeyup="filterTable3()" placeholder="Find data. . ." />
+          <div class="my-custom-scrollbar" id="style-4">
+      
+              <table  id="table3">
+                <thead>
+                    <tr class="header">
+                        <th onclick="sortTable3(0)" style="width:5%; ">ContainerID</th>
+                        <th onclick="sortTable3(1)" style="width:10%;">Date</th>
+                        <th onclick="sortTable3(2)" style="width:10%;">Time</th>
+                        <th onclick="sortTable3(3)" style="width:10%;">Celsius</th>
+                        <th onclick="sortTable3(4)" style="width:5%;">Humidity</th> 
+                        <th onclick="sortTable3(5)" style="width:10%;">Latitude</th>
+                        <th onclick="sortTable3(6)" style="width:10%;">Longitude</th>
+              
+                      </tr>
+                </thead>
+                <tbody>
+                 </tbody>
+                </table>
+            </div>
+     </div>
+
+
+
+    <div id=doorContents>
+     <h2 style=" font-size: 22px; 
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+     font-weight: bold; 
+     text-align: left; 
+     color: darkgreen;">Door Status Table</h2>
+     <ul id= "list">
+     </ul>
+     <input type="text" id="myInput6" type="text" onkeyup="filterTable6()" placeholder="Find data. . ." />
+       <div class="my-custom-scrollbar" id="style-4">
+           <table  id="table6">
+             <thead>
+                 <tr class="header">
+                     <th onclick="sortTable6(0)" style="width:5%; ">Occurence</th>
+                     <th onclick="sortTable6(1)" style="width:10%;">Start Time</th>
+                     <th onclick="sortTable6(2)" style="width:10%;">End Time</th>
+                     <th onclick="sortTable6(3)" style="width:10%;">Camera Snapshots</th> 
+                   </tr>
+             </thead>
+             <tbody>
+              </tbody>
+             </table>
+         </div>
+  </div>
+
+  <div id=imageContents>
+    <h2 style=" font-size: 22px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+    font-weight: bold; 
+    text-align: left; 
+    color: darkgreen;">Door Camera Snapshots</h2>
+
+      <div class="my-custom-scrollbar" id="style-4">
+        <table id = "List"  >
+                <tr>
+                </tr>
+            </table>
+        </div>
+ 
+
+
+ </div>
+ <div id=imageContents3>
+    <h2 style=" font-size: 22px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+    font-weight: bold; 
+    text-align: left; 
+    color: darkgreen;">Shock Camera Snapshots</h2>
+
+      <div class="my-custom-scrollbar" id="style-4">
+        <table id = "List3"  >
+                <tr>
+                </tr>
+            </table>
+        </div>
+</div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+          </div>
+ 
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyAUGHZrYdzCHwEPFWjo3FqjZEr9ZR0a9ow",
+    authDomain: "temporarydb-6928e.firebaseapp.com",
+    databaseURL: "https://temporarydb-6928e.firebaseio.com",
+    projectId: "temporarydb-6928e",
+    storageBucket: "temporarydb-6928e.appspot.com",
+    messagingSenderId: "623044431745",
+    appId: "1:623044431745:web:6b19caf3aa23ff8ed8a280",
+    measurementId: "G-XQSTFCN9XV"
+  };
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+        </script>
+        <script>
+            // counter for online cars...
+            var tempkey;
+            var btnSignal = 0;
+            var cars_count = 0;
+            var x = document.getElementById("shipmentPos");
+            var option = document.createElement("option");
+            // markers array to store all the markers, so that we could remove marker when any car goes offline and its data will be remove from realtime database...
+            var markers = [];
+            var markers2 = [];
+            var map;
+            var map2;
+            function initMap() { // Google Map Initialization... 
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 6,
+                    center: new google.maps.LatLng(34, 121.7740),
+                    mapTypeId: 'terrain'
+                });
+                map2 = new google.maps.Map(document.getElementById('map2'), {
+                    zoom: 6,
+                    center: new google.maps.LatLng(34, 121.7740),
+                    mapTypeId: 'terrain'
+                });
+            }
+            // This Function will create a car icon with angle and add/display that marker on the map
+            function AddCar(data) {
+                var icon = { // car icon
+                    path: 'M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759   c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z    M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713   v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336   h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805',
+                    scale: 0.4,
+                    fillColor: "#427af4", //<-- Car Color, you can change it 
+                    fillOpacity: 1,
+                    strokeWeight: 1,
+                    anchor: new google.maps.Point(0, 5),
+                  //<--  rotation: data.val().angle  Car angle
+                };
+                var uluru = { lat: data.val().lat, lng: data.val().lng };
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                  
+
+                });
+                 marker.setMap(map);
+
+                var infowindow = new google.maps.InfoWindow({
+                    content:  "ContainerID:"+String(data.val().shipmentID)
+                });
+                infowindow.open(map,marker);    
+                markers[data.key] = marker; // add marker in the markers array...
+                document.getElementById("cars").innerHTML = cars_count;
+                //ZOOM when clicked
+                google.maps.event.addListener(marker,'click',function() {
+                map.setZoom(6);
+                map.setCenter(marker.getPosition()); 
+                $('#shipmentPos').val(data.val().shipmentID).trigger('change'); 
+                $("div#shipmentDetails").show(100);
+                $("div#map2").show(100); 
+                $("div#map").hide(100); 
+                $("div#home").hide(100); 
+                $("#inventoryLabel").text(String(data.val().shipmentID)); 
+                chartData();
+                btnFollow();
+                });
+                google.maps.event.addListener(marker,'click',function() {
+                var pos = map.getZoom();
+                map.setZoom(6);
+                map.setCenter(marker.getPosition());
+                window.setTimeout(function() {map.setZoom(pos);},3000);
+                });
+            }
+
+            function updateData(data)
+            {
+                var icon = { // car icon
+                    path: 'M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759   c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z    M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713   v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336   h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805',
+                    scale: 0.4,
+                    fillColor: "#427af4", //<-- Car Color, you can change it 
+                    fillOpacity: 1,
+                    strokeWeight: 1,
+                    anchor: new google.maps.Point(0, 5),
+                  //<--  rotation: data.val().angle  Car angle
+                };
+                var uluru = { lat: data.val().lat, lng: data.val().lng };
+                var marker2 = new google.maps.Marker({
+                    position: uluru,
+             
+                });
+         
+                marker2.setMap(map2);
+             
+                var infowindow = new google.maps.InfoWindow({
+                    content:  "ContainerID:"+String(data.val().shipmentID)
+                });
+                infowindow.open(map2,marker2);    
+                markers2[data.key] = marker2; // add marker in the markers array...
+                document.getElementById("cars").innerHTML = cars_count;
+                //ZOOM when clicked
+ 
+                google.maps.event.addListener(marker2,'click',function() {
+                var pos = map.getZoom();
+                map2.setZoom(15);
+                map2.setCenter(marker2.getPosition());
+                //window.setTimeout(function() {map2.setZoom(pos);},10000);
+                }); 
+            }
+            function btnFollow()
+                {
+                var table3 = document.querySelector('#table3 tbody');
+                var table4 = document.querySelector('#table4 tbody');
+                var table5 = document.querySelector('#table5 tbody');
+                var table6 = document.querySelector('#table6 tbody');
+                var shipmentsTable3 = firebase.database().ref()
+                .child("/shipmentsTable/monitoringShipments");
+                var productTable4 = firebase.database().ref().child("shipmentsProducts");
+                var shockTable5 = firebase.database().ref().child("shockTable");
+                var doorTable6 = firebase.database().ref().child("doorTable/"+x.value+"/");
+
+
+                shipmentsTable3.on('value', function(snapshot){
+                    while(table3.hasChildNodes()) {
+                        table3.removeChild(table3.firstChild);
+                    }
+                    if(snapshot.exists()){
+                     
+                        var content = '';
+                        snapshot.forEach(function(data){
+                            var val = data.val();
+                            if(data.val().aShipmentID == x.value)
+                            {
+                            content +='<tr>';
+                            content += '<td>' + val.aShipmentID + '</td>';
+                            content += '<td>' + val.bDate + '</td>';
+                            content += '<td>' + val.cTime + '</td>';
+                            content += '<td>' + val.dCelsius +"C"       + '</td>';
+                            content += '<td>' + val.hHumidity + '</td>';
+                            content += '<td>' + val.lat + '</td>';
+                            content += '<td>' + val.lng + '</td>';
+                            content += '</tr>';
+                        }
+                        });
+                        $('#table3 tbody').append(content);
+                    }
+                });
+
+                productTable4.on('value', function(snapshot){
+                    while(table4.hasChildNodes()) {
+                        table4.removeChild(table4.firstChild);
+                    }
+                    if(snapshot.exists()){
+                     
+                        var content = '';
+                        snapshot.forEach(function(data){
+                            var val = data.val();
+                            if(data.val().aShipmentID == x.value)
+                            {
+                            content +='<tr>';
+                            content += '<td>' + val.aShipmentID + '</td>';
+                            content += '<td>' + val.bProdId + '</td>';
+                            content += '<td>' + val.cProdDesc + '</td>';
+                            content += '<td>' + val.lat + '</td>';
+                            content += '<td>' + val.lng + '</td>';
+                            content += '</tr>';
+                        }
+                        });
+                        $('#table4 tbody').append(content);
+                    }
+                });
+                            
+            
+
+                shockTable5.on('value', function(snapshot){
+                    var tempint = 0;
+                    while(table5.hasChildNodes()) {
+                        table5.removeChild(table5.firstChild);
+                    }
+                    if(snapshot.exists()){
+                        var content = '';
+                        snapshot.forEach(function(data){
+                            var val = data.val();
+                            tempint = tempint+ 1;
+                            if(data.val().shipmentID == x.value)
+                            {
+                            content +='<tr>';
+                            content += '<td>' + String(tempint) + '</td>';
+                            content += '<td>' + val.date + '</td>';
+                            content += '<td>' + val.time + '</td>';
+                            content += '<td>' + String(val.lat) + '</td>';
+                            content += '<td>' + String(val.lng) + '</td>';
+                            content += '<td>' + "<a href="+ "#!" + " onclick="+"temphi2(this.id)"+" id="+val.imageID+">" + "View Images"+ "</a>"+ '</td>';
+                            content += '</tr>';
+                        }
+                        });
+                        $('#table5 tbody').append(content);
+                    }
+                });
+
+                doorTable6.on('value', function(snapshot){
+                    var tempint = 0;
+                    while(table6.hasChildNodes()) {
+                        table6.removeChild(table6.firstChild);
+                    }
+                    if(snapshot.exists()){
+                        var content = '';
+                        snapshot.forEach(function(data){
+                            var val = data.val();
+                            tempint = tempint+ 1;
+                            if(data.val().shipmentID == x.value)
+                            {
+                            content +='<tr>';
+                            content += '<td>' + String(tempint) + '</td>';
+                            content += '<td>' + val.startTime + '</td>';
+                            content += '<td>' + val.endTime + '</td>';
+                            content += '<td>' + "<a href="+ "#!" + " onclick="+"temphi(this.id)"+" id="+val.imageID+">" + "View Images"+ "</a>"+ '</td>';
+                            content += '</tr>';
+                        }
+                        });
+                        $('#table6 tbody').append(content);
+                    }
+                });
+                
+                var cars_Ref2 =  firebase.database().ref('/location/shipments');
+                 
+                 cars_Ref2.child(x.value).once('value',  function (data) {
+                    updateData(data); 
+                    tempkey = data.key;
+                });
+                 //for  product Table    
+                }
+
+            // get firebase database reference...
+            var cars_Ref = firebase.database().ref('/location/shipments');
+            // this event will be triggered when a new object will be added in the database...
+            cars_Ref.on('child_added', function (data) {
+    
+                cars_count++;
+                AddCar(data); 
+                var option = document.createElement("option");
+                option.text = String(data.val().shipmentID);
+                x.add(option);
+            });
+            // this event will be triggered on location change of any car...
+            cars_Ref.on('child_changed', function (data) {
+                markers[data.key].setMap(null);
+                AddCar(data);
+                if(data.val().shipmentID == x.value)
+                {
+                    markers2[data.key].setMap(null); 
+                updateData(data);
+                }
+           
+            });
+            // If any car goes offline then this event will get triggered and we'll remove the marker of that car...  
+            cars_Ref.on('child_removed', function (data) {
+                markers[data.key].setMap(null);
+                markers2[data.key].setMap(null);
+                cars_count--;
+                document.getElementById("cars").innerHTML = cars_count;
+            });
+            function temphi (clicked_id) {
+                var tableImage = document.querySelector('#List tr');
+                while(tableImage.hasChildNodes()) {
+                    tableImage.removeChild(tableImage.firstChild);
+                    }
+                var storageRef = storage.ref(x.value+'/');
+                $('#List').find('tr').html('');
+                var i = 0;
+                storageRef.child(clicked_id).listAll().then(function(result){
+                result.items.forEach(function(imageRef){
+                //console.log("Image reference" + imageRef.toString());
+                i++;
+             
+                displayImage(i,imageRef);
+                });
+                });
+                function displayImage(row,images)
+                {
+                    images.getDownloadURL().then(function(url){
+                    console.log(url);
+                    let new_html = '';
+                    new_html +='<td >';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "150px" height = "180px" alt=" '+ row + '">';
+                    new_html +='</td>';
+                    $('#List').find('tr').append(new_html);
+                    });
+                }
+             }
+
+             function temphi2 (clicked_id) {
+                
+                var tableImage3 = document.querySelector('#List3 tr');
+                while(tableImage3.hasChildNodes()) {
+                    tableImage3.removeChild(tableImage3.firstChild);
+                    }
+                var storageRef = storage.ref(x.value+'/');
+                $('#List3').find('tr').html('');
+                var i = 0;
+               
+                storageRef.child(clicked_id).listAll().then(function(result){
+                result.items.forEach(function(imageRef){
+                //console.log("Image reference" + imageRef.toString());
+                i++;
+               
+                displayImage(i,imageRef);
+                });
+                });
+                function displayImage(row,images)
+                {
+                    images.getDownloadURL().then(function(url){
+                    console.log(url);
+                    let new_html = '';
+                    new_html +='<td >';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "150px" height = "180px" alt=" '+ row + '">';
+                    new_html +='</td>';
+                    $('#List3').find('tr').append(new_html);
+                    });
+                }
+             }
+        </script>
+     <script>
+         var changeimage = firebase.database().ref().child("startCam/"+x.value+"/");
+         var tableImage2 = document.querySelector('#List2 tr');
+        
+            function startCam ()
+            {
+                var tempchange= 0;
+                firebase.database().ref().child("startCam/"+x.value+"/").set({
+                start: "1" 
+            });
+     
+            $("label#lblsnapshot").show(); 
+            $("Table#List2").hide(); 
+            document.getElementById("stopBtn").disabled = true;
+            changeimage.on('child_changed', function (data) {
+                if(data.val().start == "0" && tempchange =="0")
+                {
+                 tempchange =1;
+                 document.getElementById("stopBtn").disabled = false;
+                $("table#List2").show(); 
+                $("label#lblsnapshot").hide(); 
+             
+                var storageRef = storage.ref('snapshots/');
+                $('#List2').find('tr').html('');
+                var i = 0;
+                
+                storageRef.listAll().then(function(result){
+                result.items.forEach(function(imageRef){
+                //console.log("Image reference" + imageRef.toString());
+                i++;
+                displayImage(i,imageRef);
+                });
+                });
+                function displayImage(row,images)
+                {
+                    images.getDownloadURL().then(function(url){
+                    console.log(url);
+                    let new_html = '';
+                    new_html +='<td >';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "150px" height = "280px" alt=" '+ row+ '">';
+                    new_html +='</td>';
+                    $('#List2').find('tr').append(new_html);
+                    });
+                }
+                }
+            });  
+            }
+ 
+         
+            function deletall()
+            {
+                while(tableImage2.hasChildNodes()) {
+                    tableImage2.removeChild(tableImage2.firstChild);
+                    }
+                var storageRef = storage.ref('snapshots/');
+              alert("Images deleted")
+    
+              storageRef.listAll().then(function(res) {
+              res.items.forEach(function(itemRef) {
+            
+              var gsReference = storage.refFromURL(itemRef.toString()).delete().then(function() {
+      
+              });
+            
+              });
+              });
+            }
+ 
+     </script>
+    <script>
+               $(document).on('click','img',function(){
+                 var id = $(this).attr('id');
+                 // Get the modal
+                 var modal = document.getElementById("myModal");
+                  // Get the image and insert it inside the modal - use its "alt" text as a caption
+                 var img = document.getElementById(String(id));
+                 var modalImg = document.getElementById("img01");
+                 var captionText = document.getElementById("caption");
+                 img.onclick = function(){ 
+                 modal.style.display = "block";
+                 modalImg.src = this.src;
+                 captionText.innerHTML = this.alt;
+                }
+                        // Get the <span> element that closes the modal
+                        var span = document.getElementsByClassName("close")[0];
+                        // When the user clicks on <span> (x), close the modal
+                        span.onclick = function() { 
+                        modal.style.display = "none";
+                }
+             })
+    </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7DtKqWoAtgKFmYtUu-PceyA7bV1Y9NTU&callback=initMap">
+        </script>
+        <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+        <script src="chart.js"></script>    
+    </body>
+</html>
