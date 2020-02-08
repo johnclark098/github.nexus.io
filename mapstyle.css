@@ -1,0 +1,78 @@
+
+/*css for map tracking */
+      #rectangle{
+          width:400px;
+          height:300px;
+          background:lightgreen;
+          position: absolute;
+      }
+          .gm-ui-hover-effect {
+              display: none !important;
+          }
+          .gm-style .gm-style-iw {
+          font-size: 15px; 
+  
+          }
+          #map {
+              height: 100%;
+          }
+          #map2 {
+            height: 100%;
+        }
+          html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+
+          #over_map {
+              position: absolute;
+              top: 540px;
+              left: 0px;
+              z-index: 99;
+              color: black;
+              border-radius: 20px;
+              background-color: lightgreen;
+              opacity: 80%;
+              padding: 10px;
+          }
+          #over_map2 {
+              position: absolute;
+              top: 580px;
+         
+         
+              color: black;
+              opacity: 90%;
+              padding: 9px;
+          }
+          #back {
+            position: absolute;
+            top: 0px;
+            left: 4px;
+       
+            color: blue;
+     
+            padding: 9px;
+        }
+          .btn {
+            background-color: DodgerBlue;
+            border: none;
+     
+            color: white;
+            padding: 4px;
+          
+            
+            font-size: 17px;
+            border: 1px solid grey;
+            cursor: pointer;
+          }
+          
+          /* Darker background on mouse-over */
+          .btn:hover {
+            background-color: RoyalBlue;
+          }
+            /*css for map tracking */
+            .autocomplete {
+              position: relative;
+              display: inherit;
+            }
