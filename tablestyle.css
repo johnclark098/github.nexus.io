@@ -9,86 +9,91 @@ body{
   margin-left:auto;
   margin-right:auto;
 }
-#imageContents
+
+#imageContents2
 {
-  margin: 20px;
-  border: 1px solid #555555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #555555;
    padding: 10px;
    height: 300px; 
-  width:1320px;   
+  width:100%;   
+
 }
-#imageContents3
+
+ 
+#productContents
 {
-  margin: 20px;
-  border: 1px solid #555555;
+  border: 2px solid #555555;
+  margin-top: 10px;
+  margin-bottom: 10px;
    padding: 10px;
-  width:1320px;  
-  height: 300px; 
+   width:100%; 
+   position: relative;
+
 }
 #shipmentsContents
 {
+ 
+  border: 2px solid #555555;
+  margin-top: 10px;
+  margin-bottom: 20px;
+   padding: 20px;
+   width:100%; 
+   position: relative;
+}
 
-   border: 1px solid #555555;
-  margin-top: -720px;
-  left: 735px;
-  padding: 10px;
-  width:605px; 
-  position: relative;
+#chartContents
+{
+ 
+  border: 2px solid #555555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+   padding: 10px;
+   width:100%; 
+   position: relative;
 }
 #shockContents
 {
-  margin: 20px;
-  border: 1px solid #555555;
-   padding: 10px;
-  width:675px; 
  
+  border: 2px solid #555555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+   padding: 10px;
+   width:100%; 
+   position: relative;
+ 
+}
+#imageContents3
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #555555;
+   padding: 10px;
+   height: 300px; 
+  width:100%;   
 }
 #doorContents
 {
  
-  border: 1px solid #555555;
-  margin-top: 20px; 
-   left: 735px;
+  border: 2px solid #555555;
+ margin-top: 10px;
+ margin-bottom: 10px;
   padding: 10px;
-  width:605px; 
+  width:100%; 
   position: relative;
 }
-#imageContents2
+#imageContents
 {
-  margin: 20px;
-  border: 1px solid #555555;
-  padding: 10px;
-  width:1320px; 
- 
-  margin-top: 120px; 
-  padding: 10px;
-  position: relative;
-  display: none;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #555555;
+   padding: 10px;
+   height: 300px; 
+  width:100%;   
 }
- 
-#productContents
-{
-  border: 1px solid #555555;
-  margin-top: 120px; 
-  left: 350px;
-  padding: 10px;
-  width:605px;  
-  position: relative;
-  display: none;
 
-}
-#chartContents
-{
-  border: 1px solid #555555;
-  margin-top: 120px;
-  
-  width:675px; 
-  left:20px;
-    height: 70%;
-    position: relative;
 
-}
  
 
 #inventoryHeader
@@ -127,14 +132,14 @@ body{
 
 #style-4::-webkit-scrollbar
 {
-	width: 2px;
+	width: 5px;
 	background-color: #F5F5F5;
 }
 
 #style-4::-webkit-scrollbar-thumb
 {
-	background-color: gray;
-	border: 2px solid #555555;
+	background-color: lightgray;
+	border: 5px solid gray;
 }
  
  
@@ -152,9 +157,10 @@ body{
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid black;
+    border: 2px solid black;
   }
-  
+ 
+
    #table1 td {
     text-align: center;
     border: 1px solid black;
@@ -165,13 +171,19 @@ body{
     border-bottom: 1px solid black;
   }
   #table1 th {
-      position: sticky;
+    position: sticky;
     text-align: center;
-    padding:10px;
     border: 1px solid black;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
   }
   #table1 tr.header, #table1 tr:hover {
     background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
   }
 
   #table2 {
@@ -191,20 +203,29 @@ body{
     border-bottom: 1px solid black;
   }
   #table2 th {
-      position: sticky;
+    position: sticky;
     text-align: center;
     border: 1px solid black;
-    padding:10px;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
   }
   #table2 tr.header, #table2 tr:hover {
     background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
   }
 
+  
   #table3 {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid black;
+    position: relative;
+    border: 2px solid black;
+    
   }
   
    #table3 td {
@@ -220,10 +241,19 @@ body{
       position: sticky;
     text-align: center;
     border: 1px solid black;
-    padding:10px;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
+
   }
+  
   #table3 tr.header, #table3 tr:hover {
     background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
+     
   }
 
 
@@ -231,7 +261,7 @@ body{
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid black;
+    border: 2px solid black;
   }
   
    #table4 td {
@@ -244,13 +274,19 @@ body{
     border-bottom: 1px solid black;
   }
   #table4 th {
-      position: sticky;
+    position: sticky;
     text-align: center;
     border: 1px solid black;
-    padding:10px;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
   }
   #table4 tr.header, #table4 tr:hover {
     background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
   }
 
 
@@ -258,7 +294,7 @@ body{
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    border: 1px solid black;
+    border: 2px solid black;
   }
   
    #table5 td {
@@ -271,13 +307,19 @@ body{
     border-bottom: 1px solid black;
   }
   #table5 th {
-      position: sticky;
+    position: sticky;
     text-align: center;
     border: 1px solid black;
-    padding:10px;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
   }
   #table5 tr.header, #table5 tr:hover {
     background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
   }
 
 
@@ -298,13 +340,19 @@ body{
     border-bottom: 1px solid black;
   }
   #table6 th {
-      position: sticky;
+    position: sticky;
     text-align: center;
     border: 1px solid black;
-    padding:10px;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
   }
   #table6 tr.header, #table6 tr:hover {
     background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
   }
 
   .buttonShipment {
@@ -351,23 +399,24 @@ body{
  
 .buttonShipment2 {
   border-radius: 10px;
-  background-color: darkgreen;
+  background-color: lightgray;
   border: none;
-  
-  color: #FFFFFF;
+  border-color: black;
+  color: black;
   text-align: center;
   font-size: 15px;
   padding: 10px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width:120px;
+  width:150px;
   transition: all 0.5s;
   cursor: pointer;
+  margin-bottom: 8px;
   
 }
 .buttonShipment2:after {
   content: '\00bb';
   position: absolute;
-  background-color: green;
+  background-color: #DAD7D7;
   opacity: 0;
   top: 0;
   right: -20px;
@@ -376,7 +425,7 @@ body{
 
 .buttonShipment2:hover  {
   padding-right: 25px;
-    background-color: green;
+    background-color: #DAD7D7;
 }
 
 .buttonShipment2:hover :after {

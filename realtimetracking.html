@@ -5,224 +5,194 @@
         <link rel="stylesheet" href="tablestyle.css">
         <link rel="stylesheet" href="mapstyle.css">
         <link rel="stylesheet" href="modalimage.css">
+        <link rel="stylesheet" href="collapsiblestyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
  
     </head>
- <body>
-
-    <div id="map" style="height: 590px; width:  1370px; top: auto;  "></div>
-
-    <div id=home>
-        <div id="over_map">
-            <div>
-                <span><label style="font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">Active Shipments: </label></span>
+ <body >
+<div style = "background-color: black;"></div>
+    <div id="home">
+        
+            <div id="over_map">
+            <span><label style="font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">Active Shipments: </label></span>
                 <span id="cars" style="font-size: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">0</span>
             </div>
-        </div>
-
-        <div id="over_map2">
-            <div>
+            <div id="over_map3">
                 <span><label style="font-size: 22px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">
-                    Check Container Status: </label></span>
-                <span > 
-                   
-                    <select id="shipmentPos" style="position: relative; width: 100px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; ">
-                  </select>    
-            
-                  </span>
-                  <button id=followShip class="btn" onclick="btnFollow()"><i class="fa fa-search"></i></button>
+                Check Container Status: </label></span>
+            <span > 
+               
+                <select id="shipmentPos" style="position: relative; width: 100px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; ">
+              </select>    
+        
+              </span>
+              <button id=followShip class="btn" onclick="btnFollow()"><i class="fa fa-search"></i></button>
             </div>
-     </div>
-   
-    </div>
+        
+ </div>
+    <div id="map" style="height:560px; width:  100%;  position: relative; top: 10px;  "></div>
 
-
-
-
- <div id="map2" style="height: 590px; width:  1370px;top: auto;display: none;"  ></div>
- 
-<div id = shipmentDetails style="display: none; " >
-
-    <a href="#" id = back><i id = back class="fa fa-arrow-circle-left" style="font-size:36px;   " ></i></a>
-    <label style="font-size: 22px;   
-    font-family: 
-    'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-    font-weight: bold;
-    position: relative;
-    margin-top: 10px;
-    left: 10px;">Tracking Container ID: 
-    </label><label id = "inventoryLabel" style="font-size: 22px; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-    font-weight: bold;
-    position: relative;
-    margin-top: 10px;
-    left: 10px;"
-    ></label>
- 
-    <button id = "cameraShow" class="buttonShipment"  style="position: relative; right:30px;top: 80px;"><span>Take Snapshots </span></button>
-    <button id = "inventoryShow" class="buttonShipment" style="position: relative; left:320px; top: 80px;"><span>Inventory </span></button>
-  
-    <div id=imageContents2>
-        <h2 style=" font-size: 22px; 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-        font-weight: bold; 
-        text-align: left; 
-        color: darkgreen;">Camera Snapshots</h2>
-        <button id = "startBtn" onclick="startCam()" class="buttonShipment2"style="position: relative; left:1060px;bottom: 70px;">Start</button>
-         <button id = "stopBtn"onclick="deletall()" class="buttonShipment2"style="position: relative; left:1060px;bottom: 70px;">Delete All</button>
-      <label id = lblsnapshot class= lblsnapshotclass style="font-size: 30px; 
+       
+    <div id="home2" style="display: none;">
+        <label style="font-size: 22px;   
+        font-family: 
+        'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+        font-weight: bold;
+        position: relative;
+        margin-top: 10px;
+        left: 10px;">Tracking Container ID: 
+        </label>
+        <label id = "inventoryLabel" style="font-size: 22px; 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
         font-weight: bold;
         position: relative;
-        top: 40px;
-        left: 240px;" >Waiting for the pictures. . .</label> 
-        <div class="my-custom-scrollbar" id="style-4">
-                <table id = "List2" style="bottom:20px; position: relative;"  >
+        margin-top: 10px;
+        left: 10px;"
+        ></label>
+ </div>
+
+
+ <div id="map2" style="height: 590px; width:  100%;display: none;"  ></div>
+
+
+<div id = shipmentDetails style="display: none; " >
+
+    <a href="#" id = back><i id = back class="fa fa-arrow-left" ></i></a>
+    
+    <h2 style="left: 20px;">Admin Panel</h2>
+ 
+    <button class="collapsible">Request Snapshots Section</button>
+    <div class="content">
+
+        <div id=imageContents2>
+            <h2 style=" font-size: 22px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold; 
+            text-align: left; 
+            color: black;">Camera Snapshots</h2>
+
+          <label id = lblsnapshot class= lblsnapshotclass style="font-size: 30px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold;
+            position: relative;
+            top: 40px;
+            left: 480px; display: none;" >Waiting for the pictures. . .</label> 
+            <div class="my-custom-scrollbar" id="style-4">
+                    <table id = "List2" style="bottom:20px; position: relative;"  >
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+         </div>
+         <button id = "startBtn" onclick="startCam()" class="buttonShipment2">Start</button>
+         <button id = "stopBtn"onclick="deleteall()" class="buttonShipment2">Delete All</button>
+    </div>
+    <button class="collapsible">Inventory Section</button>
+    <div class="content">
+        <div id=productContents >
+            <h2 style=" font-size: 22px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold; 
+            text-align: left; 
+            color: black;">Inventory Table</h2>
+            <ul id= "list">
+            </ul>
+            <input type="text" id="myInput4" type="text" onkeyup="filterTable4()" placeholder="Find data. . ." />
+              <div class="my-custom-scrollbar2" id="style-4">
+                <table  id="table4">
+                    <thead>
+                        <tr class="header">
+                            <th onclick="sortTable4(0)" style="width:5%; ">ContainerID</th>
+                            <th onclick="sortTable4(1)" style="width:10%;">ProdID</th>
+                            <th onclick="sortTable4(2)" style="width:10%;">Description</th>
+                            <th onclick="sortTable4(3)" style="width:10%;">Latitude</th>
+                            <th onclick="sortTable4(4)" style="width:10%;">Longitude</th>
+     
+                          </tr>
+                    </thead>
                     <tbody>
-                        <tr>
-                        </tr>
-                    </tbody>
+                     </tbody>
                     </table>
                 </div>
-     </div>
-
-     
-    <div id=productContents >
-        <h2 align="center">Inventory Table</h2>
-        <ul id= "list">
-        </ul>
-        <input type="text" id="myInput4" type="text" onkeyup="filterTable4()" placeholder="Find data. . ." />
-          <div class="my-custom-scrollbar2" id="style-4">
-            <table  id="table4">
-                <thead>
-                    <tr class="header">
-                        <th onclick="sortTable4(0)" style="width:5%; ">ContainerID</th>
-                        <th onclick="sortTable4(1)" style="width:10%;">ProdID</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Description</th>
-                        <th onclick="sortTable4(3)" style="width:10%;">Latitude</th>
-                        <th onclick="sortTable4(4)" style="width:10%;">Longitude</th>
- 
-                      </tr>
-                </thead>
-                <tbody>
-                 </tbody>
-                </table>
-            </div>
-     </div>
-
-    <div id=chartContents >
-        <canvas id="myChart"></canvas>
-     </div>
- 
-     <div id=shockContents>
-        <h2 style=" font-size: 22px; 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-        font-weight: bold; 
-        text-align: left; 
-        color: darkgreen;">Shock Table</h2>
-        <ul id= "list">
-        </ul>
-        <input type="text" id="myInput5" type="text" onkeyup="filterTable5()" placeholder="Find data. . ." />
-          <div class="my-custom-scrollbar" id="style-4">
-      
-              <table  id="table5">
-                <thead>
-                    <tr class="header">
-                        <th onclick="sortTable5(0)" style="width:5%; ">Occurence</th>
-                        <th onclick="sortTable5(1)" style="width:10%;">Date</th>
-                        <th onclick="sortTable5(2)" style="width:10%;">Time</th>
-                        <th onclick="sortTable5(3)" style="width:10%;">Latitude</th>
-                        <th onclick="sortTable5(4)" style="width:10%;">Longitude</th>
-                        <th onclick="sortTable6(5)" style="width:10%;">Camera Snapshots</th> 
-                      </tr>
-                </thead>
-                <tbody>
-                 </tbody>
-                </table>
-            </div>
-     </div>
-     <div id=shipmentsContents  >
-        <h2 style=" font-size: 22px; 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-        font-weight: bold; 
-        text-align: left; 
-        color: darkgreen;">Monitoring Table</h2>
-        <ul id= "list">
-        </ul>
-        <input type="text" id="myInput3" type="text" onkeyup="filterTable3()" placeholder="Find data. . ." />
-          <div class="my-custom-scrollbar" id="style-4">
-      
-              <table  id="table3">
-                <thead>
-                    <tr class="header">
-                        <th onclick="sortTable3(0)" style="width:5%; ">ContainerID</th>
-                        <th onclick="sortTable3(1)" style="width:10%;">Date</th>
-                        <th onclick="sortTable3(2)" style="width:10%;">Time</th>
-                        <th onclick="sortTable3(3)" style="width:10%;">Celsius</th>
-                        <th onclick="sortTable3(4)" style="width:5%;">Humidity</th> 
-                        <th onclick="sortTable3(5)" style="width:10%;">Latitude</th>
-                        <th onclick="sortTable3(6)" style="width:10%;">Longitude</th>
-              
-                      </tr>
-                </thead>
-                <tbody>
-                 </tbody>
-                </table>
-            </div>
-     </div>
-
-
-
-    <div id=doorContents>
-     <h2 style=" font-size: 22px; 
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-     font-weight: bold; 
-     text-align: left; 
-     color: darkgreen;">Door Status Table</h2>
-     <ul id= "list">
-     </ul>
-     <input type="text" id="myInput6" type="text" onkeyup="filterTable6()" placeholder="Find data. . ." />
-       <div class="my-custom-scrollbar" id="style-4">
-           <table  id="table6">
-             <thead>
-                 <tr class="header">
-                     <th onclick="sortTable6(0)" style="width:5%; ">Occurence</th>
-                     <th onclick="sortTable6(1)" style="width:10%;">Start Time</th>
-                     <th onclick="sortTable6(2)" style="width:10%;">End Time</th>
-                     <th onclick="sortTable6(3)" style="width:10%;">Camera Snapshots</th> 
-                   </tr>
-             </thead>
-             <tbody>
-              </tbody>
-             </table>
+         </div>    </div>
+    <button class="collapsible">Monitoring Section</button>
+    <div class="content">
+        <div id=shipmentsContents  >
+            <h2 style=" font-size: 22px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold; 
+            text-align: left; 
+            color: black;">Monitoring Table</h2>
+            <ul id= "list">
+            </ul>
+            <input type="text" id="myInput3" type="text" onkeyup="filterTable3()" placeholder="Find data. . ." />
+              <div class="my-custom-scrollbar" id="style-4">
+          
+                  <table  id="table3">
+                    <thead>
+                        <tr class="header">
+                            <th onclick="sortTable3(0)" style="width:5%; ">ContainerID</th>
+                            <th onclick="sortTable3(1)" style="width:10%;">Date</th>
+                            <th onclick="sortTable3(2)" style="width:10%;">Time</th>
+                            <th onclick="sortTable3(3)" style="width:10%;">Celsius</th>
+                            <th onclick="sortTable3(4)" style="width:5%;">Humidity</th> 
+                            <th onclick="sortTable3(5)" style="width:10%;">Latitude</th>
+                            <th onclick="sortTable3(6)" style="width:10%;">Longitude</th>
+                  
+                          </tr>
+                    </thead>
+                    <tbody>
+                     </tbody>
+                    </table>
+                    
+                </div>
          </div>
-  </div>
-
-  <div id=imageContents>
-    <h2 style=" font-size: 22px; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-    font-weight: bold; 
-    text-align: left; 
-    color: darkgreen;">Door Camera Snapshots</h2>
-
-      <div class="my-custom-scrollbar" id="style-4">
-        <table id = "List"  >
-                <tr>
-                </tr>
-            </table>
+         <div id=chartContents >
+            <canvas id="myChart"></canvas>
+         </div>
         </div>
- 
 
+    <button class="collapsible">Shock Section</button>
+    <div class="content">
+        <div id=shockContents>
+            <h2 style=" font-size: 22px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold; 
+            text-align: left; 
+            color: black;">Shock Table</h2>
+            <ul id= "list">
+            </ul>
+            <input type="text" id="myInput5" type="text" onkeyup="filterTable5()" placeholder="Find data. . ." />
+              <div class="my-custom-scrollbar" id="style-4">
+          
+                  <table  id="table5">
+                    <thead>
+                        <tr class="header">
+                            <th onclick="sortTable5(0)" style="width:5%; ">Occurence</th>
+                            <th onclick="sortTable5(1)" style="width:10%;">Date</th>
+                            <th onclick="sortTable5(2)" style="width:10%;">Time</th>
+                            <th onclick="sortTable5(3)" style="width:10%;">Latitude</th>
+                            <th onclick="sortTable5(4)" style="width:10%;">Longitude</th>
+                            <th onclick="sortTable6(5)" style="width:10%;">Camera Snapshots</th> 
+                          </tr>
+                    </thead>
+                    <tbody>
+                     </tbody>
+                    </table>
+                </div>
+         </div>
 
- </div>
+           
  <div id=imageContents3>
     <h2 style=" font-size: 22px; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
     font-weight: bold; 
     text-align: left; 
-    color: darkgreen;">Shock Camera Snapshots</h2>
+    color: black;">Shock Camera Snapshots</h2>
 
       <div class="my-custom-scrollbar" id="style-4">
         <table id = "List3"  >
@@ -230,7 +200,52 @@
                 </tr>
             </table>
         </div>
-</div>
+    </div>
+        
+    </div>
+
+    <button class="collapsible">Door Section</button>
+    <div class="content">
+        <div id=doorContents>
+            <h2 style=" font-size: 22px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold; 
+            text-align: left; 
+            color: black;">Door Status Table</h2>
+            <ul id= "list">
+            </ul>
+            <input type="text" id="myInput6" type="text" onkeyup="filterTable6()" placeholder="Find data. . ." />
+              <div class="my-custom-scrollbar" id="style-4">
+                  <table  id="table6">
+                    <thead>
+                        <tr class="header">
+                            <th onclick="sortTable6(0)" style="width:5%; ">Occurence</th>
+                            <th onclick="sortTable6(1)" style="width:10%;">Start Time</th>
+                            <th onclick="sortTable6(2)" style="width:10%;">End Time</th>
+                            <th onclick="sortTable6(3)" style="width:10%;">Camera Snapshots</th> 
+                          </tr>
+                    </thead>
+                    <tbody>
+                     </tbody>
+                    </table>
+                </div>
+         </div>
+
+         <div id=imageContents>
+            <h2 style=" font-size: 22px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+            font-weight: bold; 
+            text-align: left; 
+            color: black;">Door Camera Snapshots</h2>
+        
+              <div class="my-custom-scrollbar" id="style-4">
+                <table id = "List"  >
+                        <tr>
+                        </tr>
+                    </table>
+                </div>
+         </div>
+    </div>
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
@@ -239,6 +254,11 @@
           </div>
  
     </div>
+
+
+
+    
+    
     <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
@@ -259,6 +279,7 @@
     appId: "1:623044431745:web:6b19caf3aa23ff8ed8a280",
     measurementId: "G-XQSTFCN9XV"
   };
+  
      // Initialize Firebase
      firebase.initializeApp(firebaseConfig);
         </script>
@@ -628,7 +649,7 @@
             }
  
          
-            function deletall()
+            function deleteall()
             {
                 while(tableImage2.hasChildNodes()) {
                     tableImage2.removeChild(tableImage2.firstChild);
@@ -670,6 +691,23 @@
                 }
              })
     </script>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
+          });
+        }
+        </script>
+        
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7DtKqWoAtgKFmYtUu-PceyA7bV1Y9NTU&callback=initMap">
         </script>
         <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>

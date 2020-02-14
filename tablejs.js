@@ -67,5 +67,4 @@ function sortTable(n) {
       }
   }
   
-  document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
-  
+     document.querySelector('#myInput').addEventListener('keyup', filterTable, false);

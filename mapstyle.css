@@ -27,52 +27,66 @@
 
           #over_map {
               position: absolute;
-              top: 540px;
-              left: 0px;
-              z-index: 99;
               color: black;
-              border-radius: 20px;
-              background-color: lightgreen;
-              opacity: 80%;
-              padding: 10px;
+              border-radius: 5px;
+              top: 8px;
+              padding: 5px;
+              left:1125px;
           }
-          #over_map2 {
-              position: absolute;
-              top: 580px;
-         
-         
+     
+          #home {
+          
+            background-color:#F3F2F2	;
+            border-radius: 10px;
+              margin: 4px;
               color: black;
-              opacity: 90%;
+              opacity: 80%;
               padding: 9px;
+              border: gray;
+              border-style: solid;
+              border-width: 1px;
           }
           #back {
             position: absolute;
-            top: 0px;
-            left: 4px;
-       
-            color: blue;
-     
+            top: 2px;
+            left: 650px;
+            
+            color: black;
+            font-size:30px; 
             padding: 9px;
         }
+        #back:hover{
+
+          color: gray;
+
+
+        }
           .btn {
-            background-color: DodgerBlue;
             border: none;
-     
-            color: white;
-            padding: 4px;
-          
-            
-            font-size: 17px;
-            border: 1px solid grey;
+            background-color: #F3F2F2;
+            font-size: 20px;
+            left: 100px;
             cursor: pointer;
           }
           
           /* Darker background on mouse-over */
           .btn:hover {
-            background-color: RoyalBlue;
+            background-color:lightgray;
           }
             /*css for map tracking */
             .autocomplete {
               position: relative;
               display: inherit;
             }
+
+            #home2 {
+              background-color:#F3F2F2;
+              border-radius: 10px;
+              margin: 4px;
+              color: black;
+              opacity: 80%;
+              padding: 9px;
+              border: gray;
+              border-style: solid;
+              border-width: 1px;
+          }

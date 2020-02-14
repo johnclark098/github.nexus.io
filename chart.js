@@ -12,10 +12,12 @@ var firebaseConfig = {
 
 $(document).ready(function () {
 $("button#followShip").click(function(){
+    $("div#home2").show(100);
     $("div#shipmentDetails").show(100);
     $("div#map2").show(100); 
-    $("div#map").hide(100); 
-    $("div#home").hide(100); 
+    $("div#map").hide(50); 
+    $("div#home").hide(50);  
+   
     $("#inventoryLabel").text(x.value);
     chartData();
   });
@@ -47,6 +49,7 @@ $("button#followShip").click(function(){
 
   $("a#back").click(function(){
     $("div#shipmentDetails").hide(100);
+    $("div#home2").hide(100); 
     $("div#map2").hide(100); 
     $("div#map").show(100); 
     $("div#home").show(100); 
