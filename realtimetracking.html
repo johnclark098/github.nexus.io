@@ -32,7 +32,7 @@
             </div>
         
  </div>
-    <div id="map" style="height:560px; width:  100%;  position: relative; top: 10px;  "></div>
+    <div id="map" style="height:89%; width:  100%;  position: relative; top: 10px;  "></div>
 
        
     <div id="home2" style="display: none;">
@@ -54,7 +54,7 @@
  </div>
 
 
- <div id="map2" style="height: 590px; width:  100%;display: none;"  ></div>
+ <div id="map2" style="height:89%; width:  100%;  position: relative; top: 10px;display: none;"  ></div>
 
 
 <div id = shipmentDetails style="display: none; " >
@@ -79,7 +79,7 @@
             position: relative;
             top: 40px;
             left: 480px; display: none;" >Waiting for the pictures. . .</label> 
-            <div class="my-custom-scrollbar" id="style-4">
+            <div class="my-custom-scrollbar" id="style-4" style="height: 90%;">
                     <table id = "List2" style="bottom:20px; position: relative;"  >
                         <tbody>
                             <tr>
@@ -194,7 +194,7 @@
     text-align: left; 
     color: black;">Shock Camera Snapshots</h2>
 
-      <div class="my-custom-scrollbar" id="style-4">
+      <div class="my-custom-scrollbar" id="style-4" style="height: 90%;">
         <table id = "List3"  >
                 <tr>
                 </tr>
@@ -238,9 +238,9 @@
             text-align: left; 
             color: black;">Door Camera Snapshots</h2>
         
-              <div class="my-custom-scrollbar" id="style-4">
-                <table id = "List"  >
-                        <tr>
+              <div class="my-custom-scrollbar" id="style-4" style="height: 90%;">
+                <table id = "List"   >
+                        <tr >
                         </tr>
                     </table>
                 </div>
@@ -396,7 +396,7 @@
                 var shipmentsTable3 = firebase.database().ref()
                 .child("/shipmentsTable/monitoringShipments");
                 var productTable4 = firebase.database().ref().child("shipmentsProducts");
-                var shockTable5 = firebase.database().ref().child("shockTable");
+                var shockTable5 = firebase.database().ref().child("shockTable/"+x.value+"/");
                 var doorTable6 = firebase.database().ref().child("doorTable/"+x.value+"/");
 
 
@@ -562,7 +562,7 @@
                     console.log(url);
                     let new_html = '';
                     new_html +='<td >';
-                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "150px" height = "180px" alt=" '+ row + '">';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px" alt=" '+ row + '">';
                     new_html +='</td>';
                     $('#List').find('tr').append(new_html);
                     });
@@ -593,7 +593,7 @@
                     console.log(url);
                     let new_html = '';
                     new_html +='<td >';
-                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "150px" height = "180px" alt=" '+ row + '">';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px"alt=" '+ row + '">';
                     new_html +='</td>';
                     $('#List3').find('tr').append(new_html);
                     });
@@ -639,7 +639,7 @@
                     console.log(url);
                     let new_html = '';
                     new_html +='<td >';
-                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "150px" height = "280px" alt=" '+ row+ '">';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px" alt=" '+ row+ '">';
                     new_html +='</td>';
                     $('#List2').find('tr').append(new_html);
                     });
