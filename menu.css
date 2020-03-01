@@ -1,0 +1,166 @@
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000080;
+    overflow-x: hidden;
+    padding-top: 20px;
+ 
+  }
+  .sidenav a {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    margin-bottom: 1px;
+    
+    font-size: 15px;
+    background-color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    display: block;
+  }
+  .sidenav a:hover {
+    border: 3px solid transparent;
+  }
+  a {
+        z-index: 50;
+        height: 35px;
+        color:  rgb(206, 201, 201);
+        display: block;
+        font-size: 20px;
+        
+        position: relative;
+        text-decoration: none;
+        transition: all 0.2s ease;
+  }
+  .sidenav a:hover {
+          color: #000080;
+          background-color: white;
+          border-radius: 2%;
+          top: 2px;
+          position: inline-block;
+          margin-bottom: 10px;
+  
+        }
+        .sidenav a:hover:after {
+          width: 100%;
+          height: 100%;
+          border-radius: 5%;
+          background: lighten(black, 10%);
+        }
+        .sidenav a:after {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 50;
+          width: 199px;
+    
+          content: "";
+          margin: auto;
+          border-radius: 50%;
+          position: inherit;
+          background: white;
+          transition: all 0.7s ease;                
+        }
+  .sidenav a.navActive {
+    color: #000080;
+    background-color: white;
+    border-radius: 2%;
+    top: 2px;
+    position: inline-block;
+    margin-bottom: 10px;
+  }
+  .sidenav .logo {
+    color: white;
+    top: 12;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 40px;
+   left: 40px;
+   
+  }
+  .sidenav .text {
+    color: white;
+    top: 2;
+   left: 40px;
+  
+   font-size:24px;
+   
+  }
+  
+  .notification {
+    background-color: #555;
+    color: white;
+   
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  
+  .notification:hover {
+    background: red;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+  }
+  .main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 14px;}
+  }
+  .usertext
+  {
+    color: white;
+    font-size: 15px;
+    position: relative;
+    top: 5px;
+    right: 5px;
+  }
+  .accountlisttext
+  {
+    color: white;
+    border-color: #000080;
+    background-color: #000080;
+    font-size: 10px;
+    position: absolute;
+     
+    right: 107px;
+   top: 70px;
+  }
+
+  .accountlisttext2
+  {
+    color: white;
+    border-color: #000080;
+    background-color: #000080;
+    font-size: 10px;
+    position: absolute;
+     
+    right: 90px;
+   top: 70px;
+  }
+
+  .userlogo
+  {
+    height: auto;
+    width: 30%;
+    position: relative;
+    top:18px ; 
+   
+  }

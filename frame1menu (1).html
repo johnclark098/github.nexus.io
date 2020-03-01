@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("a#shipmentLabel").click(function(){
+      $("div#shipmentDetails").show(500);
+      $("div#map").hide(200);
+    });
+  });
+
+  $(document).ready(function(){
+    $("a#mapLabel").click(function(){
+      $("div#map").show(500);
+      $("div#shipmentDetails").hide(200);
+    });
+  });
+  </script>
+
+<style>
+body {
+  transition: background-color .5s;
+  overflow-y: auto;
+}
+
+</style>
+</head>
+<body>
+ 
+<div id="mySidenav" class="sidenav" >
+  <img src="userlogo.png"   class="userlogo" >
+  <label id="username" class="usertext" img src="iconlatest.png" >Username</label>
+  
+  <select id="accountlist" class="accountlisttext">
+    <option >username@gmail.com</option>
+    <option>Change Account</option>
+    <option>Log out</option>
+  </select>
+  <hr>
+ <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
+  <a href="#" >  <i style="right: 4px;top: 5px; position: relative;" class="material-icons">home</i>  Home</a>
+ 
+ <!--  <a href="#" id="mapLabel">  <i class="material-icons">local_shipping</i> Shipment Tracker</a>-->
+  <a href="#" id="shipmentLabel"><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >person</i> Clients</a>
+  <a href="#" onclick="closeNav()"><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >notifications</i> Incidents</a>
+  
+</div>
+
+
+<div id="shipmentDetails" style="display: none;">
+
+        <object type="text/html" data="tracker/index.html"
+                style="width:85.5%; height:100%; position: fixed; margin-left: 200px;">
+        </object>
+</div>
+
+<div id="map" style="display: block;">
+  <object type="text/html" data="tracker/Firebase-Realtime-Car-Moving-On-JavaScript-Google-Maps-master/realtimetracking.html"
+          style="width:85.5%; height:100%; position: fixed;  margin-left: 190px;margin-top: -6px;">
+  </object>
+</div>
+ <!--
+<div id="main">
+  
+  <span style="font-size:30px;cursor:pointer"  onclick="openNav()">&#9776;</span>
+<a href="#" class="notification" style="left: 600px">
+  <span>Alerts</span>
+  <span class="badge">4</span>
+</a>
+</div>
+-->
+
+
+  <!--
+<script>
+ 
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+  document.body.style.backgroundColor = "white";
+}
+</script>
+-->
+<script>
+ function load_shipmentDetails() {
+     document.getElementById("shipmentDetails").display="block";
+     document.getElementById("map").display="none";
+}
+function load_map() {
+ 
+  document.getElementById("shipmentDetails").display="none";
+     document.getElementById("map").display="block";
+}
+  </script>
+
+</body>
+</html> 

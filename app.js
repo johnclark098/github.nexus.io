@@ -13,6 +13,7 @@
   firebase.initializeApp(firebaseConfig); 
  
   var storage = firebase.storage();
+  
 /*
 var xx = document.getElementById("shipmentPos"); 
 //for home shipments Table

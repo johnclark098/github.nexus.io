@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+</head>
+<body id="bodyid" class="bodyclass" onload="startLoad()">
+ 
+
+
+
+
+
+<div id="mainid" class="mainclass"  >
+    <div id="mainaID" class="mainaclass"  >
+        <label class="switch"><input type="checkbox" id="togBtn"value="on">
+            <div class="slider round"><!--ADDED HTML -->
+                <span class="on">Sign Up</span><span class="off">Sign In</span>
+                <!--END--></div></label>
+
+        <img id ="img1"src="admin.jpg"  
+        class="imageadd1" value="on">
+        <img id ="img2"src="employee.jpg"  
+        class="imageremove2">
+        
+        <label 
+        style="font-size: 20px; 
+        font-weight: bold;
+        position: relative; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        top: 80px;
+        color: white;
+        right: 65px;">Admin</label>
+        
+        <label 
+        style="font-size: 20px; 
+        font-weight: bold;
+        position: relative; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        top: 80px;
+        color: white;
+        left: 25px;">Employee</label>
+      
+    </div>
+
+
+    <div id="mainbID" class="mainbclass"  >
+        <div id="signinAdminID" class="signinAdminClass">
+            <label  class="labelAdmin" style="position: relative; bottom: 50px;">Sign-In For Admin</label>
+            <label  id="lblNotify" style="display: block; color: red;"></label>
+
+            <input type="text" id = "userinAdmin" placeholder="Enter Username"   required>
+            <input type="password"id = "passinAdmin"  placeholder="Enter Password" required>
+    
+            <button id="admInBtn" class="btnDone">Done</button>
+        </div> 
+        
+        <div id="signupAdminID" class="signupAdminClass" style="display: none;">
+            <label  class="labelAdmin"  style="position: relative; bottom: 50px;">Sign-Up For Admin</label>
+            <label  id="lblNotify" style="display: block; color: red;"></label>
+            <input type="text" id = "userupAdmin" placeholder="Enter Username"   required>
+            <input type="password"id = "passupAdmin"  placeholder="Enter Password" required>
+            <input type="text" id = "codeupAdmin" placeholder="Enter Code"   required>
+
+            <button id="admUpBtn"  class="btnDone">Done</button>
+        </div> 
+
+        <div id="signinEmpID" class="signinEmpClass" style="display: none;">
+            <label  class="labelAdmin"  style="position: relative; bottom: 50px;">Sign-In For Employee</label>
+            <label  id="lblNotify" style="display: block; color: red;"></label>
+            <input type="text" id = "userinEmp" placeholder="Enter Username"   required>
+            <input type="password"id = "passinEmp"  placeholder="Enter Password" required>
+ 
+
+            <button id="empInBtn"  class="btnDone">Done</button>
+        </div> 
+
+        <div id="signupEmpID" class="signupEmpClass" style="display: none;">
+            <label  class="labelAdmin"  style="position: relative; bottom: 50px;">Sign-Up For Employee</label>
+            <label  id="lblNotify" style="display: block; color: red;"></label>
+            <input type="text" id = "userupEmp" placeholder="Enter Username"   required>
+            <input type="password"id = "passupEmp"  placeholder="Enter Password" required>
+            <input type="text" id = "codeupEmp" placeholder="Enter Code"   required>
+            <button id="empUpBtn"  class="btnDone">Done</button>
+        </div> 
+    </div>
+</div>
+
+<!--
+<div class="card">
+    <h2>Choose Account</h2>
+
+    <ul>
+        <li>
+            <input type="radio" name="name" id="one" checked />
+            <label for="one">Admin</label>
+
+            <div class="check"></div>
+        </li>
+
+        <li>
+            <input type="radio" name="name" id="two" />
+            <label for="two">Employee</label>
+
+            <div class="check"></div>
+        </li>
+    </ul>
+</div>
+
+input[type=radio] {
+	position: absolute;
+	visibility: hidden;
+}
+
+label { 
+	cursor: pointer; 
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.check {
+	width: 30px; height: 30px;
+	position: absolute;
+	border-radius: 50%;
+	transition: transform .6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Reset */
+input#one ~ .check { 
+	transform: translate(-50px, -25px); 
+  box-shadow: 0 1px 2px black;
+}
+input#two ~ .check { 
+	transform: translate(-50px, -83px); 
+	background: black;
+  box-shadow: 0 1px 2px black;
+}
+
+/* Radio Input #1 */
+input#one:checked ~ .check { transform: translate(-50px, 33px); }
+
+/* Radio Input #2  */
+input#two:checked ~ .check { transform: translate(-50px, -25px); }
+
+
+-->
+ 
+<div class="imageDiv">
+
+</div>
+    <script>
+        function startLoad()
+            {   
+                 
+               if(localStorage.getItem("username") != null)
+               {
+                window.location.href="file:///D:/Yuro/Tracker/sampleweb.github.io-master/realtimetracking.html#";
+               }
+         
+             
+                
+            }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+ 
+    <script src="login.js"></script>
+</body>
+</html>

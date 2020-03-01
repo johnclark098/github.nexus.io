@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Circles</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+        var cityCircle 
+        var map;
+        var lngData;
+        var latData;
+        var markersArray = [];
+      function initMap() {
+        // Create the map.
+     map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 37.090, lng: -95.712},
+          mapTypeId: 'terrain'
+          
+        });
+            // add a click event handler to the map object
+            google.maps.event.addListener(map, "click", function(event)
+            {
+                // place a marker
+                placeMarker(event.latLng);
+                alert(event.latLng.lat() + "," + event.latLng.lng());
+           
+            });
+        var icon = { // car icon
+                    path: 'M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759   c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z    M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713   v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336   h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805',
+                    scale: 0.4,
+                    fillColor: "#427af4", //<-- Car Color, you can change it 
+                    fillOpacity: 1,
+                    strokeWeight: 1,
+                    anchor: new google.maps.Point(0, 5),
+                  //<--  rotation: data.val().angle  Car angle
+                    };
+                 latData= 12.090;
+                 lngData = -117.712;
+
+                var uluru = { lat: latData, lng: lngData };
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                });
+                 marker.setMap(map);
+        // Construct the circle for each value in citymap.
+        // Note: We scale the area of the circle based on the population.
+         
+          // Add the circle for this city to the map.
+          
+    
+       
+      }
+
+      function placeMarker(location) {
+            // first remove all markers if there are any
+            deleteOverlays();
+
+             cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center:location,
+            radius: 800000
+          });
+                           
+          var cityposX=cityCircle.getCenter().lat();
+            var cityposY=cityCircle.getCenter().lng();
+
+            distance = Math.sqrt(Math.pow((cityposX -latData ),2)+Math.pow((cityposY-lngData),2));
+            alert(distance);
+
+            if(distance <=7.2)
+            {
+                alert("Incoming!!!");
+            }
+
+            var marker = new google.maps.Marker({
+                position: location, 
+                map: map
+            });
+
+            // add marker in markers array
+            markersArray.push(marker);
+
+            //map.setCenter(location);
+        }
+
+        // Deletes all markers in the array by removing references to them
+        function deleteOverlays() {
+       
+            if (markersArray) {
+                for (i in markersArray) {
+                    cityCircle.setMap(null);
+                    markersArray[i].setMap(null);
+                }
+            markersArray.length = 0;
+            }
+        }
+    </script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7DtKqWoAtgKFmYtUu-PceyA7bV1Y9NTU&callback=initMap">
+            </script>
+
+
+  </body>
+</html>
