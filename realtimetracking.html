@@ -342,10 +342,16 @@
                 $("a#nav3").hide();
                 $("a#nav4").hide();
             }
-            else
+            else if(localStorage.getItem("role")=="Admin")
             {
                 $("select#accountlist").addClass("accountlisttext");
                 $("select#accountlist").removeClass("accountlisttext2");
+            }
+            else
+            {
+              window.location.href=" https://johnclark098.github.io/sampleweb.github.io/login"; 
+
+               
             }
         }
 
