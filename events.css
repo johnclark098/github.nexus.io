@@ -1,0 +1,10 @@
+#eventChoose {
+    position: absolute;
+    color: white;
+    background-color: #000080;
+    border-radius: 5px;
+    top:10px;
+    display: none;
+    padding: 5px;
+    left:205px;
+}

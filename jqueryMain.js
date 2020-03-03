@@ -70,6 +70,9 @@ $(document).ready(function () {
         $("a#nav5").removeClass("navActive");
         $("div#monitoringID").hide();
         $("div#snapshotsID").hide();
+        $("div#eventMap").hide(10); 
+        $("div#eventChoose").hide(10);
+        $("div#eventMap").hide(10); 
       });
       
       $("a#nav2").click(function(){ 
@@ -86,6 +89,9 @@ $(document).ready(function () {
         $("div#over_map").hide(10); 
         $("div#snapshotsID").show();
         $("div#monitoringID").hide(); 
+        $("div#eventChoose").hide(10);
+        $("div#eventMap").hide(10); 
+
         chartDoorData();
         chartShockData();
          /*$('select#shipmentPos > option').each(function() {
@@ -106,7 +112,10 @@ $(document).ready(function () {
         $("a#nav5").removeClass("navActive");
         $("div#map").hide(10); 
         $("div#map2").hide(10); 
-        $("div#over_map").hide(10);  
+        $("div#over_map").hide(10);   
+        $("div#eventChoose").show(10);
+        $("div#eventMap").show(10); 
+
       
       });
     
@@ -133,10 +142,17 @@ $(document).ready(function () {
         $("div#over_map").hide(10); 
         changeMap();
       });
+
+      $('select#shipmentPos2').on('change', function() {
+        if(tempkey2 != null)
+        {
+            markers3[tempkey2].setMap(null);  
+        }
+        eventTrigger();
+      });
       
       function changeMap()
       {
-    
         if(tempkey != null)
         {
             markers2[tempkey].setMap(null);  
@@ -150,6 +166,7 @@ $(document).ready(function () {
         else
         {
             btnFollow();
+            $('div#barchartContents').hide();
             $("div#over_map").hide(10); 
             $("div#shipmentDetails").show(100);
             $("#inventoryLabel").text(x.value);

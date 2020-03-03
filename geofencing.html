@@ -26,12 +26,13 @@
         var map;
         var lngData;
         var latData;
-        var distance;
+        var distance=0;
         var line;
         var uluru;
         var markersArray = [];
         var mk1;
         var mk2;
+        var radiusSet;
         function haversine_distance(mk1, mk2) {
           var R = 3958.8; // Radius of the Earth in miles
           var rlat1 = mk1.position.lat() * (Math.PI/180); // Convert degrees to radians
@@ -78,8 +79,8 @@
             // first remove all markers if there are any
             mk1 = new google.maps.Marker({position: location, map: map});
             mk2 = new google.maps.Marker({position: uluru, map: map});
-            distance = haversine_distance(mk1, mk2);
-        
+            distance = (haversine_distance(mk1, mk2)* 1.6);
+      
             deleteOverlays();
             cityCircle = new google.maps.Circle({
             strokeColor: '#FF0000',
@@ -89,16 +90,9 @@
             fillOpacity: 0.35,
             map: map,
             center:location
-          });
-                           
+          });               
             var cityposX=cityCircle.getCenter().lat();
             var cityposY=cityCircle.getCenter().lng();
-            distance2 = Math.sqrt(Math.pow((cityposX -latData ),2)+Math.pow((cityposY-lngData),2));
-          //map.setCenter(location)
-            if(distance2 <=7.2)
-            {
-                alert("Incoming!!!");
-            }
             var marker = new google.maps.Marker({
                 position: location, 
                 map: map
@@ -107,8 +101,17 @@
             markersArray.push(marker);
             markersArray.push(mk1);
             markersArray.push(mk2);
+            if(distance !=0)
+            {
+              cityCircle.setRadius(radiusSet);
+              $("input#radiusText").text(radiusSet);  
+            }
+            if(distance<= radiusSet)
+            {
+              alert("Shipment is on the area");
+            }
             var contentString = '<div class="iw-content"style="font-size: 22px;">'  
-              + ' <label id="msg">'+"Distance to destination: " + distance.toFixed(2) + " mi."+'</label>'
+              + ' <label id="msg">'+"Distance to destination: " + distance.toFixed(2) + " km"+'</label>'
               +'<div class="iw-content">'  
               + ' <input    id="radiusText"type="text"style="font-size: 15px; margin:15px; border:2px solid black; text-align: center;" placeholder="Set radius in KM"></input>' 
               + ' <button onclick="myFunction()" id="btn">Save</button>' ;
@@ -118,19 +121,15 @@
             });
             line = new google.maps.Polyline({path: [location, uluru], map: map});
             infowindow.open(map,marker); 
-            // Calculate and display the distance between markers
-
-         // Calculate and display the distance between markers
-   
-       
         }
-        
-       
         function myFunction()
         {
-        
-          var radiusSet = parseInt($("input#radiusText").val()) * 1000
+          radiusSet = (parseInt($("input#radiusText").val()) * 1010);
           cityCircle.setRadius(radiusSet);
+          if(distance<= parseInt($("input#radiusText").val()))
+          {
+            alert("Shipment is on the area");
+          }
         }
         // Deletes all markers in the array by removing references to them
         function deleteOverlays() {

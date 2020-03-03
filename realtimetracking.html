@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="tablestyle.css">
         <link rel="stylesheet" href="mapstyle.css">
+        <link rel="stylesheet" href="events.css">
         <link rel="stylesheet" href="modalimage.css">
         <link rel="stylesheet" href="collapsiblestyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,79 +21,74 @@
         <img src="userlogo.png"   class="userlogo" >
         <label id="username" class="usertext" img src="iconlatest.png" >
         </label>
-        
-        <label id="accountlist" class="accountlisttext"  >
-          
+        <label id="accountlist" class="accountlisttext"  > 
         </label>
-      
         <hr>
        <!-- <a href="javascript:voidnavActive(0)" class="closebtn" onclick="closeNav()">&times;</a>-->
         <a href="#"  id="nav1"class = "navActive">   <i style="right: 4px;top: 5px; position: relative;" class="material-icons" >gps_fixed</i>  Tracking Shipments</a>
-       
        <!--  <a href="#" id="mapLabel">  <i class="material-icons">local_shipping</i> Shipment Tracker</a>-->
         <a href="#" id="nav2" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >announcement</i> Events</a>
         <a href="#"id="nav3" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >location_on</i> Set Location</a>
         <a href="#"id="nav4" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >settings</i> Manage Roles</a>
-
         <a href="#"id="nav5" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >logout</i> Log Out</a>
-
     </div>
 <!--------------------------------------------------------------------------------------------------------> 
 <!-------------------------------------------------------------------------------------------------------->   
-<div id="home" style="display: none;">
-            <div id="over_map3">
-                <span><label style="font-size: 22px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">
-                Check Container Status: </label></span>
-            <span > 
-             <!-- 
-  
-                <select id="shipmentPos" style="position: relative; width: 100px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; ">
-              </select>  -->    
-        
-              </span>
-              <button id=followShip class="btn" onclick="btnFollow()"><i class="fa fa-search"></i></button>
-            </div>
-        
- </div>
+    <div id="home" style="display: none;">
+        <div id="over_map3">
+            <span><label style="font-size: 22px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">
+            Check Container Status: </label></span>
+        <span > 
+        <!-- 
+            <select id="shipmentPos" style="position: relative; width: 100px; font-size: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; ">
+        </select>  -->    
+        </span>
+        <button id=followShip class="btn" onclick="btnFollow()"><i class="fa fa-search"></i></button>
+        </div>  
+    </div>
 <!-------------------------------------------------------------------------------------------------------->
-<!-------------------------------------------------------------------------------------------------------->    
-<div id="map" style="height:100%; width:  85.3%;  position: relative;  margin-left: 14.6%; "></div>
+    <!-------------------------------------------------------------------------------------------------------->    
+    <div id="map" style="height:100%; width:  85.3%;  position: relative;  margin-left: 14.6%; "></div>
+    <div id="map2" style="height:50%; width:  85.3%;  position: relative;  margin-left: 14.6%;display: none;"  ></div>
+    <div id="eventMap" style="height:100%; width:  85.3%;  position: relative;  margin-left: 14.6%;display: none;"></div>
 
-<div id="map2" style="height:50%; width:  85.3%;  position: relative;  margin-left: 14.6%;display: none;"  ></div>
-
-<div id="over_map">
-    
-    <span><label style="font-size: 12px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">Active Shipments: </label></span>
-        <span id="cars" style="font-size: 12px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">0</span>
+    <div id="over_map">
+        <span><label style="font-size: 12px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">Active Shipments: </label></span>
+            <span id="cars" style="font-size: 12px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; font-weight: bold;">0</span>
     </div>
     <div id="over_map3">
         <span > Track Shipment:
             <select id="shipmentPos" class ="shipmentDropdown"   >
                 <option >All</option>
             </select>    
-          </span>
-                </div>   
-
+        </span>
+    </div>   
+   
+    <div id="eventChoose">
+        <span > Choose Shipment:
+            <select id="shipmentPos2" class ="shipmentDropdown"> 
+            </select>    
+        </span>
+    </div> 
+    
 
 <!-------------------------------------------------------------------------------------------------------->
- 
-<div id=barchartContents >
+    <div id=barchartContents >
+        <h2 style=" font-size: 22px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+        font-weight: bold; 
+        text-align: left; 
+        color: black;">Door Occurence Graph</h2>
+    <canvas id="doorChart" width="800" height="450"></canvas>
     <h2 style=" font-size: 22px; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
     font-weight: bold; 
     text-align: left; 
-    color: black;">Door Occurence Graph</h2>
-  <canvas id="doorChart" width="800" height="450"></canvas>
-
-  <h2 style=" font-size: 22px; 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-  font-weight: bold; 
-  text-align: left; 
-  color: black;">Shock Occurence Graph</h2>
-<canvas id="shockChart" width="800" height="450"></canvas>
- </div>
+    color: black;">Shock Occurence Graph</h2>
+    <canvas id="shockChart" width="800" height="450"></canvas>
+    </div>
  <!-------------------------------------------------------------------------------------------------------->
-<div id="home2" style="display: none;">
+    <div id="home2" style="display: none;">
         <label style="font-size: 22px;   
         font-family: 
         'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
@@ -108,9 +104,8 @@
         margin-top: 10px;
         left: 10px;"
         ></label>
- </div> 
+    </div> 
 <!-------------------------------------------------------------------------------------------------------->
- 
 <!-------------------------------------------------------------------------------------------------------->
 <div id = shipmentDetails style="display: none;  margin-left: 15%;" >
     <!--<a href="#" id = back><i id = back class="fa fa-arrow-left" ></i></a>-->
@@ -162,7 +157,6 @@
                                 <th onclick="sortTable4(2)" style="width:10%;">Description</th>
                                 <th onclick="sortTable4(3)" style="width:10%;">Latitude</th>
                                 <th onclick="sortTable4(4)" style="width:10%;">Longitude</th>
-        
                             </tr>
                         </thead>
                      <tbody>
@@ -194,16 +188,13 @@
                                 <th onclick="sortTable3(4)" style="width:5%;">Humidity</th> 
                                 <th onclick="sortTable3(5)" style="width:10%;">Latitude</th>
                                 <th onclick="sortTable3(6)" style="width:10%;">Longitude</th>
-                    
                              </tr>
                         </thead>
                     <tbody>
                      </tbody>
-                    </table>
-                    
+                    </table> 
                 </div>
          </div>
-
          <div id=chartContents >
             <canvas id="myChart"></canvas>
          </div>
@@ -251,11 +242,8 @@
                     </table>
             </div>
         </div>
-        
     </div>
 
-    <button class="collapsible">Door Section</button>
-    <div class="content">
         <div id=doorContents>
             <h2 style=" font-size: 22px; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
@@ -292,9 +280,10 @@
                         <tr >
                         </tr>
                     </table>
-                </div>
-         </div>
-    </div>
+              </div>
+        
+
+    
      <!-- The Modal -->
      <div id="myModal" class="modal">
         <span class="close">&times;</span>
@@ -312,6 +301,11 @@
     <script>
         function startLoad()
         {
+  
+            if(localStorage.getItem("role") == null)
+            {
+              window.location.href="file:///D:/Yuro/tempNexus/login.html";     
+            }
             $("label#accountlist").text(localStorage.getItem("role"));    
             if(localStorage.getItem("username").length >=11)
             {
@@ -343,10 +337,7 @@
                 $("select#accountlist").addClass("accountlisttext");
                 $("select#accountlist").removeClass("accountlisttext2");
             }
-            else
-            {
-              window.location.href=" https://johnclark098.github.io/sampleweb.github.io/login";     
-            }
+          
         }
 
     </script>
@@ -376,15 +367,40 @@
             // counter for online cars...
             var menuChanged = 0;
             var tempkey;
+            var tempkey2;
             var btnSignal = 0;
             var cars_count = 0;
             var x = document.getElementById("shipmentPos");
+            var x1 = document.getElementById("shipmentPos2");
             var option = document.createElement("option");
+            var option2 = document.createElement("option");
             // markers array to store all the markers, so that we could remove marker when any car goes offline and its data will be remove from realtime database...
             var markers = [];
             var markers2 = [];
+            var markers3 = [];
+            var designationInfo;
+            var designationMarker;
             var map;
             var map2;
+            var eventMap;
+            var cityCircle 
+            var lngData;
+            var latData;
+            var distance;
+            var line;
+            var uluru1;
+            var markersArray = [];
+            var mk1;
+            var mk2;
+            function haversine_distance(mk1, mk2) {
+                var R = 3958.8; // Radius of the Earth in miles
+                var rlat1 = mk1.position.lat() * (Math.PI/180); // Convert degrees to radians
+                var rlat2 = mk2.position.lat() * (Math.PI/180); // Convert degrees to radians
+                var difflat = rlat2-rlat1; // Radian difference (latitudes)
+                var difflon = (mk2.position.lng()-mk1.position.lng()) * (Math.PI/180); // Radian difference (longitudes)
+                var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
+                return d;
+                }
             function initMap() { // Google Map Initialization... 
                 map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 6,
@@ -396,6 +412,29 @@
                     center: new google.maps.LatLng(34, 121.7740),
                     mapTypeId: 'terrain'
                 });
+
+            //--------------------------event Map---------------------------------//
+                eventMap = new google.maps.Map(document.getElementById('eventMap'), {
+                    zoom: 6,
+                    center: new google.maps.LatLng(34, 121.7740),
+                    mapTypeId: 'terrain'
+                });
+                        // add a click event handler to the map object
+                google.maps.event.addListener(eventMap, "click", function(event)
+                {
+                    // place a marker
+                    placeMarker(event.latLng);
+                });
+                var icon = { // car icon
+                  path: 'M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759   c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z    M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713   v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336   h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805',
+                  scale: 0.4,
+                  fillColor: "#427af4", //<-- Car Color, you can change it 
+                  fillOpacity: 1,
+                  strokeWeight: 1,
+                  anchor: new google.maps.Point(0, 5),
+                //<--  rotation: data.val().angle  Car angle
+                  };
+             //--------------------------event Map---------------------------------//
             }
             // This Function will create a car icon with angle and add/display that marker on the map
             function AddCar(data) {
@@ -416,13 +455,11 @@
                  marker.setMap(map);
                 var contentString = '<div class="iw-content">' + '<div class="iw-subTitle">ContainerID:'+String(data.val().shipmentID)+' </div>' ;
             // + '<p>455 street</p>' + '<p>City, World</p>' + '<p>Canada, Postalcode</p>' + '</div>'
-
+                
                 var infowindow = new google.maps.InfoWindow({
                     content:  contentString
                 });
-   
                 infowindow.open(map,marker);   
- 
                 markers[data.key] = marker; // add marker in the markers array...
                 document.getElementById("cars").innerHTML = cars_count;
                 //ZOOM when clicked
@@ -484,9 +521,84 @@
                 //window.setTimeout(function() {map2.setZoom(pos);},10000);
                 }); 
             }
+            function eventTracker(data)
+            {
+                var icon = { // car icon
+                    path: 'M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759   c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z    M32.618,10.773c-1.016,3.9-2.219,8.51-2.219,8.51H16.631l-2.222-8.51C14.41,10.773,23.293,7.755,32.618,10.773z M15.741,21.713   v4.492l-2.73-0.349V14.502L15.741,21.713z M13.011,37.938V27.579l2.73,0.343v8.196L13.011,37.938z M14.568,40.882l2.218-3.336   h13.771l2.219,3.336H14.568z M31.321,35.805v-7.872l2.729-0.355v10.048L31.321,35.805',
+                    scale: 0.4,
+                    fillColor: "#427af4", //<-- Car Color, you can change it 
+                    fillOpacity: 1,
+                    strokeWeight: 1,
+                    anchor: new google.maps.Point(0, 5),
+                //<--  rotation: data.val().angle  Car angle
+                };
+                uluru1 = { lat: data.val().lat, lng: data.val().lng };
+                var marker2 = new google.maps.Marker({
+                    position: uluru1,
+                });
+                marker2.setMap(eventMap);
+                var infowindow = new google.maps.InfoWindow({
+                    content:  "ContainerID:"+String(data.val().shipmentID)
+                });
+                infowindow.open(map2,marker2);    
+                markers3[data.key] = marker2; // add marker in the markers array..
+                document.getElementById("cars").innerHTML = cars_count;
+                //ZOOM when clicked
+                google.maps.event.addListener(marker2,'click',function() {
+                var pos = map.getZoom();
+                map2.setZoom(15);
+                map2.setCenter(marker2.getPosition());
+                //window.setTimeout(function() {map2.setZoom(pos);},10000);
+                }); 
+                deleteOverlays();
+                if(String(data.val().radiusLat) !="0")
+                {
+                designationMarker = { lat: parseInt(data.val().radiusLat), lng: parseInt(data.val().radiusLng) };       
+              
+                cityCircle = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    map: eventMap,
+                    center: designationMarker,
+                    radius:parseInt(data.val().radius)
+                });   
+      
+                var marker = new google.maps.Marker({
+                    position: designationMarker, 
+                    map: eventMap
+                });
+                markersArray.push(marker);
+                designationInfo = new google.maps.InfoWindow({
+                    content:  "Designation Marker"
+                });
+                line = new google.maps.Polyline({path: [designationMarker, uluru1], map: eventMap});
+                designationInfo.open(eventMap,marker);                          
+            }
+            if(String(data.val().radius) !="0")
+                {
+                    designationSet= (parseInt(data.val().radius) / 1010);
+                    designationDistance = { lat: data.val().lat, lng: data.val().lng};
+                    shipmentDistance = { lat: parseInt(data.val().radiusLat), lng: parseInt(data.val().radiusLng)};
+                    mk1 = new google.maps.Marker({position: designationDistance, map: eventMap});
+                    mk2 = new google.maps.Marker({position: shipmentDistance, map: eventMap});
+                    distance = haversine_distance(mk1, mk2)*1.595;        
+                    markersArray.push(mk1);
+                    markersArray.push(mk2);
+                    alert(designationSet);
+                    alert(distance);
+                    if(distance<= designationSet)
+                    {
+                     
+                        alert("Shipment is on the area");
+                    }
+                }
+            }
             function btnFollow()
                 { 
-                $('div#barchartContents').hide();
+              
                 var table3 = document.querySelector('#table3 tbody');
                 var table4 = document.querySelector('#table4 tbody');
                 var table5 = document.querySelector('#table5 tbody');
@@ -609,9 +721,10 @@
                 AddCar(data); 
                 var option = document.createElement("option");
                 option.text = String(data.val().shipmentID);
-                x.add(option);
-       
-                
+                x.add(option);   
+                var option2 = document.createElement("option");
+                option2.text = String(data.val().shipmentID);
+                x1.add(option2);   
             });
             // this event will be triggered on location change of any car...
             cars_Ref.on('child_changed', function (data) {
@@ -622,7 +735,14 @@
                     markers2[data.key].setMap(null); 
                     updateData(data);
                 }
+                if(data.val().shipmentID == x1.value)
+                {
+                    markers3[data.key].setMap(null); 
+                    eventTracker(data);
+                }
+
             });
+            
             // If any car goes offline then this event will get triggered and we'll remove the marker of that car...  
             cars_Ref.on('child_removed', function (data) {
                 markers[data.key].setMap(null);
@@ -798,7 +918,7 @@
           });
         }
         </script>
-        
+        <script src="eventMap.js"></script>   
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7DtKqWoAtgKFmYtUu-PceyA7bV1Y9NTU&callback=initMap">
         </script>
         <script src="https://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
