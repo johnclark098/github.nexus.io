@@ -1,5 +1,5 @@
 function accountFunction() {
-        window.location.href="file:///D:/Yuro/tempNexus/login.html";
+        window.location.href="https://johnclark098.github.io/sampleweb.github.io/login";
         localStorage.removeItem("username");
         localStorage.removeItem("role");
   }
