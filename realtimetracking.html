@@ -127,7 +127,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
             font-weight: bold;
             position: relative;
-<<<<<<< HEAD
             top: 150px;
             left: 380px; display: none;" >Waiting for the pictures. . .</label> 
             <div class="my-custom-scrollbar" id="style-4" style="position: relative; height: 520px;">
@@ -138,18 +137,6 @@
                     </tbody>
                     </table>
             </div>
-=======
-            top: 40px;
-            left: 480px; display: none;" >Waiting for the pictures. . .</label> 
-            <div class="my-custom-scrollbar" id="style-4" style="height: 90%;">
-                    <table id = "List2" style="bottom:20px; position: relative;"  >
-                        <tbody>
-                            <tr>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
->>>>>>> parent of 2584ea9... Update realtimetracking.html
          </div>
          <a button id = "startBtn" onclick="startCam()" class="buttonShipment2">Start</a>
          <a id = "stopBtn"onclick="deleteall()" class="buttonShipment2">Delete All</a>
@@ -251,7 +238,6 @@
                 </div>
          </div>
            
-<<<<<<< HEAD
         <div id=imageContents3>
             <h2 style=" font-size: 22px; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
@@ -264,20 +250,6 @@
                         </tr>
                     </table>
             </div>
-=======
- <div id=imageContents3>
-    <h2 style=" font-size: 22px; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
-    font-weight: bold; 
-    text-align: left; 
-    color: black;">Shock Camera Snapshots</h2>
-
-      <div class="my-custom-scrollbar" id="style-4" style="height: 90%;">
-        <table id = "List3"  >
-                <tr>
-                </tr>
-            </table>
->>>>>>> parent of 2584ea9... Update realtimetracking.html
         </div>
         
     </div>
@@ -315,55 +287,36 @@
             font-weight: bold; 
             text-align: left; 
             color: black;">Door Camera Snapshots</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
               <div class="my-custom-scrollbar" id="style-4" style="position: relative; height: 520px;">
                     <table id = "List"   >
-=======
-=======
->>>>>>> parent of 2584ea9... Update realtimetracking.html
-=======
->>>>>>> parent of 2584ea9... Update realtimetracking.html
-=======
->>>>>>> parent of 2584ea9... Update realtimetracking.html
-        
-              <div class="my-custom-scrollbar" id="style-4" style="height: 90%;">
-                <table id = "List"   >
->>>>>>> parent of 2584ea9... Update realtimetracking.html
                         <tr >
                         </tr>
                     </table>
                 </div>
          </div>
     </div>
+     <!-- The Modal -->
+     <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+      </div>
+
+</div>
 
 
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="img01">
-            <div id="caption"></div>
-          </div>
- 
-    </div>
+   
 <!-------------------------------------------------------------------------------------------------------->
 
 
     <script>
         function startLoad()
         {
-           
-        
             $("label#accountlist").text(localStorage.getItem("role"));    
-     
             if(localStorage.getItem("username").length >=11)
             {
                 var usertxt = localStorage.getItem("username").substring(0, 11) +"...";
                 $("label#username").text(usertxt); 
-
             }
             else
             {
@@ -385,25 +338,22 @@
                 $("a#nav3").hide();
                 $("a#nav4").hide();
             }
-            else if(localStorage.getItem("role") == "Admin")
+            else if(localStorage.getItem("role")=="Admin")
             {
                 $("select#accountlist").addClass("accountlisttext");
                 $("select#accountlist").removeClass("accountlisttext2");
             }
             else
             {
-            window.location.href="https://johnclark098.github.io/sampleweb.github.io/login";
+              window.location.href=" https://johnclark098.github.io/sampleweb.github.io/login";     
             }
-            
         }
 
     </script>
-    
     <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase.js"></script>
     <script src="app.js"></script>
-    
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Firebase -->
@@ -613,7 +563,7 @@
                             content += '<td>' + val.time + '</td>';
                             content += '<td>' + String(val.lat) + '</td>';
                             content += '<td>' + String(val.lng) + '</td>';
-                            content += '<td>' + "<a href="+ "#!" + " onclick="+"temphi2(this.id)"+" id="+val.imageID+">" + "View Images"+ "</a>"+ '</td>';
+                            content += '<td>' + "<a href="+ "#!" + "onclick="+"temphi2(this.id)"+" id="+val.imageID+">" + "View Images"+ "</a>"+ '</td>';
                             content += '</tr>';
                         }
                         });

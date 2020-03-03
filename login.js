@@ -127,7 +127,7 @@ $(document).ready(function(){
                         {
                             localStorage.setItem("username",data.val().username);
                             localStorage.setItem("role","Admin");
-                            window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
+                            window.location.href=" https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
                             temp=1;
                         }
                         else if(str1 =="" || str2=="")

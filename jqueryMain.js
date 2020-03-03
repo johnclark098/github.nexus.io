@@ -106,7 +106,7 @@ $(document).ready(function () {
         $("a#nav5").removeClass("navActive");
         $("div#map").hide(10); 
         $("div#map2").hide(10); 
-        $("div#over_map").hide(10);  s
+        $("div#over_map").hide(10);  
       
       });
     
