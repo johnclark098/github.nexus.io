@@ -68,11 +68,13 @@ $(document).ready(function () {
         $("a#nav3").removeClass("navActive");
         $("a#nav4").removeClass("navActive");
         $("a#nav5").removeClass("navActive");
+        $("a#nav6").removeClass("navActive");
         $("div#monitoringID").hide();
         $("div#snapshotsID").hide();
         $("div#eventMap").hide(10); 
         $("div#eventChoose").hide(10);
         $("div#eventMap").hide(10); 
+        $("div#notifID").hide(10);
       });
       
       $("a#nav2").click(function(){ 
@@ -86,6 +88,8 @@ $(document).ready(function () {
         $("a#nav3").removeClass("navActive");
         $("a#nav4").removeClass("navActive");
         $("a#nav5").removeClass("navActive");
+        $("a#nav6").removeClass("navActive");
+        $("div#notifID").hide(10);
         $("div#over_map").hide(10); 
         $("div#snapshotsID").show();
         $("div#monitoringID").hide(); 
@@ -110,15 +114,15 @@ $(document).ready(function () {
         $("a#nav3").addClass("navActive");
         $("a#nav4").removeClass("navActive");
         $("a#nav5").removeClass("navActive");
+        $("a#nav6").removeClass("navActive");
         $("div#map").hide(10); 
         $("div#map2").hide(10); 
         $("div#over_map").hide(10);   
         $("div#eventChoose").show(10);
         $("div#eventMap").show(10); 
-
+        $("div#notifID").hide(10);
       
       });
-    
       $("a#nav4").click(function(){ 
         $('div#barchartContents').hide();
         $('div#over_map3').hide();
@@ -128,13 +132,35 @@ $(document).ready(function () {
         $("a#nav3").removeClass("navActive");
         $("a#nav4").addClass("navActive");
         $("a#nav5").removeClass("navActive");
+        $("a#nav6").removeClass("navActive");
+        $("div#notifID").show(10); 
         $("div#map").hide(10); 
         $("div#map2").hide(10); 
- 
+        $("div#eventChoose").hide(10);
+        $("div#eventMap").hide(10); 
         $("div#over_map").hide(10); 
+        readNotif();
+      });
+     
+      $("a#nav5").click(function(){ 
+        $('div#barchartContents').hide();
+        $('div#over_map3').hide();
+        $("div#shipmentDetails").hide(100);
+        $("a#nav1").removeClass("navA ctive");
+        $("a#nav2").removeClass("navActive");
+        $("a#nav3").removeClass("navActive");
+        $("a#nav4").removeClass("navActive");
+        $("a#nav5").addClass("navActive");
+        $("a#nav6").removeClass("navActive");
+        $("div#map").hide(10); 
+        $("div#map2").hide(10); 
+        $("div#eventChoose").hide (10);
+        $("div#eventMap").hide(10); 
+        $("div#over_map").hide(10);
+
       });
       
-      $("a#nav5").click(function(){
+      $("a#nav6").click(function(){
 
         accountFunction();
       });

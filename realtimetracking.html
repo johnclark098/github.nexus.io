@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
   
- <body onload="startLoad()">
+ <body onload="startLoad()" style="background-color: lightgray;">
  <!-------------------------------------------------------------------------------------------------------->
     <div id="mySidenav" class="sidenav" >
         <img src="userlogo.png"   class="userlogo" >
@@ -29,8 +29,9 @@
        <!--  <a href="#" id="mapLabel">  <i class="material-icons">local_shipping</i> Shipment Tracker</a>-->
         <a href="#" id="nav2" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >announcement</i> Events</a>
         <a href="#"id="nav3" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >location_on</i> Set Location</a>
-        <a href="#"id="nav4" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >settings</i> Manage Roles</a>
-        <a href="#"id="nav5" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >logout</i> Log Out</a>
+        <a href="#"id="nav4" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >notification_important</i> Notifcations</a>
+        <a href="#"id="nav5" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >settings</i> Manage Roles</a>
+        <a href="#"id="nav6" ><i class="material-icons"style="right: 4px;top: 5px; position: relative;" >logout</i> Log Out</a>
     </div>
 <!--------------------------------------------------------------------------------------------------------> 
 <!-------------------------------------------------------------------------------------------------------->   
@@ -70,7 +71,9 @@
             </select>    
         </span>
     </div> 
-    
+    <div id="notifID" class="notifClass">
+        
+    </div>
 
 <!-------------------------------------------------------------------------------------------------------->
     <div id=barchartContents >
@@ -587,13 +590,14 @@
                     distance = haversine_distance(mk1, mk2)*1.595;        
                     markersArray.push(mk1);
                     markersArray.push(mk2);
-                    alert(designationSet);
-                    alert(distance);
+         
+           
                     if(distance<= designationSet)
                     {
-                     
-                        alert("Shipment is on the area");
-                    }
+                    firebase.database().ref('/notifications/notifLoc'+data.val().shipmentID+'').set({
+                        text: "Container " + data.val().shipmentID +" is in the area" 
+                    });
+                     }
                 }
             }
             function btnFollow()
@@ -926,5 +930,6 @@
         <script src="chart.js"></script>    
         <script src="barChartGraph.js"></script>   
         <script src="account.js"></script>  
+        <script src="notif.js"></script>  
     </body>
 </html>

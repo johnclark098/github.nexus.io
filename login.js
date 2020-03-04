@@ -127,7 +127,7 @@ $(document).ready(function(){
                         {
                             localStorage.setItem("username",data.val().username);
                             localStorage.setItem("role","Admin");
-                            window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
+                            window.location.href=" file:///D:/Yuro/tempNexus/realtimetracking.html#"; 
                             temp=1;
                         }
                         else if(str1 =="" || str2=="")
@@ -176,6 +176,7 @@ $(document).ready(function(){
                                     $("input:password").val(""); 
                                     temp=1;
                                 }
+                      
                         }
                     });
                     if(temp==0)
