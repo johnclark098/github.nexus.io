@@ -19,14 +19,11 @@ function readNotif()
           { 
             content +='<img  src="location.jpg" class="notifImage">';
           }
-          
           content += '<label class="labelClass">' + String(childSnapshot.val().text) + '</label>'; 
           content += '</div>'; 
         $('#notifID').append(content);
         });
-    }); 
- 
-        
+    });       
 }
 function deleteNotif(clicked_id)
 {

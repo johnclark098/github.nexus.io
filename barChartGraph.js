@@ -1,10 +1,15 @@
 var myChart;
 var myChart2;
+function graphData()
+{
+    $("label#refreshLabelID").hide();
+    chartDoorData();
+    chartShockData();
+}
 function chartDoorData()
 {
        // initialize Global variables
        var dataArr = [];
-       var compareVal ='';
        // Get data function reads the firebase database. Order the data by Child of key foodAndDrinks
        // It then traverses each value in the firebase and 
        // for each record compares if the current value and previous value are same cuisine increments by 1 
@@ -23,29 +28,21 @@ function chartDoorData()
                 num = num+1;
                 var obj = snapshot.val();
                 objTemp=obj.shipmentID;
-               
             });
-           
             dataArr = ({
                 label: objTemp,
                 value:num,
             });
+            addData(myChart,dataArr.value , dataArr.label);  
                     // myChart.data.datasets[0].data[selectItems] = num;
           //  myChart.data.labels[selectItems] =obj.shipmentID; 
           //  myChart.update();
             // Verify that values are defined and push data into the chart    
-            if(typeof dataArr.label !== 'undefined' && typeof dataArr.value !=='undefined'){
-                   addData(myChart,dataArr.value , dataArr.label);  
-            }
                 // var unique = $.makeArray($(dataArr).filter(function(i,itm){
                 //     return i == $(dataArr).index(itm);
                 // })); 
-                
-          
             }
         });
- 
-
        }
     var ctx = document.getElementById("doorChart");
     myChart = new Chart(ctx, {

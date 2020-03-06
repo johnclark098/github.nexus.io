@@ -127,7 +127,14 @@ $(document).ready(function(){
                         {
                             localStorage.setItem("username",data.val().username);
                             localStorage.setItem("role","Admin");
-                            window.location.href=" file:///D:/Yuro/tempNexus/realtimetracking.html#"; 
+                            localStorage.setItem("doorshock","1");
+                            localStorage.setItem("geo","1");
+                            localStorage.setItem("notif","1");
+                            localStorage.setItem("track","1");
+                            localStorage.setItem("roles","1");
+                            localStorage.setItem("id","1");
+                            localStorage.setItem("username",data.val().username);
+                            window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
                             temp=1;
                         }
                         else if(str1 =="" || str2=="")
@@ -197,11 +204,17 @@ $(document).ready(function(){
                  snapshot.forEach(function(data){
                     if(str1==data.val().username && str2==data.val().password)
                     {
+                        localStorage.setItem("doorshock",data.val().doorshock);
+                        localStorage.setItem("geo",data.val().geo);
+                        localStorage.setItem("notif",data.val().notif);
+                        localStorage.setItem("track",data.val().track);
+                        localStorage.setItem("roles",data.val().roles);
+                        localStorage.setItem("id",data.val().id);
                         localStorage.setItem("username",data.val().username);
                         localStorage.setItem("role","Employee");
-                        window.location.href="file:///D:/Yuro/Tracker/sampleweb.github.io-master/realtimetracking.html#"; 
+                        window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
                         temp=1;
-                    }
+                    }   
                     else if(str1 =="" || str2=="")
                     {
                         $("label#lblNotify").show();

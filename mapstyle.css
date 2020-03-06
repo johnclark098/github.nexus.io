@@ -106,11 +106,22 @@
           border-radius: 50%; 
           background-color: white; 
           position: absolute;
-         
           right: 0;
-     
-   
         }
+
+        #rolesDiv{
+          position: absolute;
+          font-size: 20px;
+          margin: 20px;
+      }
+      #rolesDropdown
+      {
+       position: relative; 
+       width: 400px; 
+ 
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
+ 
+      }
         .shipmentDropdown
         {
          position: relative; 

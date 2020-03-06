@@ -57,13 +57,52 @@ body{
 #barchartContents
 {
   display: none;
-  border: 2px solid #555555;
-  margin-top: 10px;
  
+  margin-top: 10px;
+  background-color: white;
   margin-bottom: 10px;
    padding: 10px;
     margin-left: 15.5%;
    width:84%; 
+   position: relative;
+}
+#refreshButton
+{
+  position: absolute;
+  width: 3%;
+  top : 1%;
+  left: 95%;
+}
+.refreshLabel
+{
+  position: absolute;
+ font-size: 12px;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ color: gray;
+  top : 1.5%;
+  left: 86%;
+}
+.refreshLabel2
+{
+  position: absolute;
+ font-size: 12px;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ color: gray;
+  top : 1.5%;
+  left: 82%;
+
+}
+
+#rolesContents
+{
+  display: none;
+  margin-top: 10px;
+  background-color: white;
+  margin-bottom: 10px;
+   padding: 10px;
+    margin-left: 15.5%;
+   width:84%; 
+   height:96%;
    position: relative;
 }
 #shockContents
@@ -374,6 +413,46 @@ body{
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
     top: 0;
   }
+ #table6 tr {
+    border-bottom: 1px solid black;
+  }
+  #table6 th {
+    position: sticky;
+    text-align: center;
+    border: 1px solid black;
+    padding:10px;   
+    top: 0;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: #f1f1f1;
+  }
+  #table6 tr.header, #table6 tr:hover {
+    background-color: #f1f1f1;
+    position: sticky;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    top: 0;
+  }
+
+
+  #table7 tr {
+    border-bottom: 1px solid black;
+  }
+  #table7 th {
+    position: relative;
+    text-align: center;
+    border: 1px solid black;
+    padding:5px;   
+    top: 50px;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+    background-color: lightgray;
+  }
+
+  #table7 td {
+    text-align: center;
+    top: 50px;
+    position: relative;
+  }
+
+
 
   .buttonShipment {
   border-radius: 14px;
@@ -451,4 +530,16 @@ body{
 .buttonShipment2:hover :after {
   opacity: 1;
   right: 0;
+}
+
+
+
+/*for div employee*/
+.headerEmp
+{
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  top: 70px;
+  margin-left: 250px;
 }

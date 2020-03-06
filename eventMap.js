@@ -37,8 +37,9 @@ function placeMarker(location) {
       +'<div class="iw-content">'  
       + ' <input  id="radiusText"type="text"style="font-size: 15px; margin:15px; border:2px solid black; text-align: center; width=80%;" placeholder="Set radius in KM"></input>' 
      
-      + ' <button onclick="changeRadius()" id="btn">Save</button>' ;
-      + ' <button onclick="changeRadius()" id="btn">Cancel</button>' ;
+      + ' <button onclick="changeRadius()" id="btn">Save</button>'  
+      +'</div>' 
+        +'</div>' ;
       // + '<p>455 street</p>' + '<p>City, World</p>' + '<p>Canada, Postalcode</p>' + '</div>'
     var infowindow = new google.maps.InfoWindow({
         content:  contentString
@@ -68,6 +69,11 @@ function changeRadius()
  
        
   }
+}
+function close()
+{
+    deleteOverlays();
+    infowindow.open(eventMap,marker); 
 }
 // Deletes all markers in the array by removing references to them
 function deleteOverlays() {

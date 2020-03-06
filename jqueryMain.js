@@ -61,6 +61,7 @@ $(document).ready(function () {
         else
         {
           $("div#map").show(10); 
+
         }
         $("div#over_map").show(10);  
         $('div#barchartContents').hide();
@@ -75,10 +76,12 @@ $(document).ready(function () {
         $("div#eventChoose").hide(10);
         $("div#eventMap").hide(10); 
         $("div#notifID").hide(10);
+        $("div#rolesContents").hide();
       });
       
       $("a#nav2").click(function(){ 
         $('div#barchartContents').show();
+        $("div#snapshotsID").show();
         $('div#over_map3').hide();
         $("div#shipmentDetails").hide(100);
         $("div#map").hide(10); 
@@ -91,18 +94,22 @@ $(document).ready(function () {
         $("a#nav6").removeClass("navActive");
         $("div#notifID").hide(10);
         $("div#over_map").hide(10); 
-        $("div#snapshotsID").show();
+  
         $("div#monitoringID").hide(); 
         $("div#eventChoose").hide(10);
         $("div#eventMap").hide(10); 
-
-        chartDoorData();
-        chartShockData();
+        $("div#rolesContents").hide();
+        if(div2Temp ==0)
+        {
+          $("label#refreshLabelID").removeClass("refreshLabel");
+          $("label#refreshLabelID").addClass("refreshLabel2");
+          chartShockData();
+          chartDoorData();
+          div2Temp = 1;
+        }
          /*$('select#shipmentPos > option').each(function() {
           alert(  $(this).val());
       });*/
-   
-     
       });
     
       $("a#nav3").click(function(){
@@ -121,7 +128,7 @@ $(document).ready(function () {
         $("div#eventChoose").show(10);
         $("div#eventMap").show(10); 
         $("div#notifID").hide(10);
-      
+        $("div#rolesContents").hide();
       });
       $("a#nav4").click(function(){ 
         $('div#barchartContents').hide();
@@ -139,6 +146,7 @@ $(document).ready(function () {
         $("div#eventChoose").hide(10);
         $("div#eventMap").hide(10); 
         $("div#over_map").hide(10); 
+        $("div#rolesContents").hide();
         readNotif();
       });
      
@@ -154,10 +162,12 @@ $(document).ready(function () {
         $("a#nav6").removeClass("navActive");
         $("div#map").hide(10); 
         $("div#map2").hide(10); 
-        $("div#eventChoose").hide (10);
+        $("div#eventChoose").hide(10);
         $("div#eventMap").hide(10); 
         $("div#over_map").hide(10);
-
+        $("div#notifID").hide(10);
+        $("div#rolesContents").show();
+        readRoles();
       });
       
       $("a#nav6").click(function(){
@@ -165,8 +175,23 @@ $(document).ready(function () {
         accountFunction();
       });
       $('select#shipmentPos').on('change', function() {
-        $("div#over_map").hide(10); 
-        changeMap();
+        if(x.value == "All")
+        {
+          $("div#shipmentDetails").hide(100);
+     
+          $("div#map2").hide(100); 
+          $("div#map").show(100); 
+         
+        
+          markers2[tempkey].setMap(null);
+          myChart.destroy();
+        }
+        else
+        {
+          $("div#over_map").hide(10); 
+          changeMap();
+        }
+       
       });
 
       $('select#shipmentPos2').on('change', function() {
@@ -177,6 +202,9 @@ $(document).ready(function () {
         eventTrigger();
       });
       
+      $('select#rolesDropdown').on('change', function() {
+         empID = $(this).children("option:selected").val().substring(0, 13);
+      });
       function changeMap()
       {
         if(tempkey != null)
@@ -237,4 +265,7 @@ $(document).ready(function () {
             });
         }
       }
+   
     })
+
+    
