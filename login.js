@@ -17,6 +17,7 @@ $(document).ready(function(){
         var codeDb = firebase.database().ref('/accounts/codeID');
         var userDb = firebase.database().ref('/accounts/employee');
     $("img#img1").click(function(){
+        $("label#switchButton").css("visibility", "hidden");
         $("label#lblNotify").hide();
         $("img#img2").removeClass("imageadd2");
         $("img#img2").addClass("imageremove2");
@@ -25,14 +26,14 @@ $(document).ready(function(){
         $("input:text").val("");
         $("label#lblNotify").text("");  
         $("input:password").val("");
-        if($("#togBtn").attr("value") == "on")
-        {
+   
             $("div#signupAdminID").hide();
             $("div#signinAdminID").show();
             $("div#signupEmpID").hide();
             $("div#signinEmpID").hide();
              
-        }
+       
+        /*
         else
         {
             $("div#signupAdminID").show();
@@ -40,11 +41,12 @@ $(document).ready(function(){
  
             $("div#signupEmpID").hide();
             $("div#signinEmpID").hide();
-        }
+        }*/
       
     });  
      //image 2 button   
     $("img#img2").click(function(){
+        $("label#switchButton").css("visibility", "visible");
         $("label#lblNotify").hide();
         $("img#img1").removeClass("imageadd1");
         $("img#img1").addClass("imageremove1");
@@ -163,7 +165,7 @@ $(document).ready(function(){
         codeDb.once('value', function(snapshot){
                 if(snapshot.exists()){
                     snapshot.forEach(function(data){
-                         if(str1 =="" || str2==""|| str3=="")
+                         if(str1 =="" || str2=="")
                         {
                             $("label#lblNotify").show();
                             $("label#lblNotify").text("Please complete all fields");   
@@ -202,7 +204,19 @@ $(document).ready(function(){
         userDb.on('value', function(snapshot){
             if(snapshot.exists()){
                  snapshot.forEach(function(data){
-                    if(str1==data.val().username && str2==data.val().password)
+                    if(str1==data.val().username && data.val().password=="1111")
+                    {
+                        $("label#lblNotify").show();
+                        $("label#lblNotify").text("Please activate first your account by signing in");  
+                        temp=1;         
+                    }
+                    else if(str1 =="" || str2=="")
+                    {
+                        $("label#lblNotify").show();
+                        $("label#lblNotify").text("Please complete all fields");               
+                        temp=1;     
+                    }
+                    else if(str1==data.val().username && str2==data.val().password)
                     {
                         localStorage.setItem("doorshock",data.val().doorshock);
                         localStorage.setItem("geo",data.val().geo);
@@ -215,11 +229,7 @@ $(document).ready(function(){
                         window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
                         temp=1;
                     }   
-                    else if(str1 =="" || str2=="")
-                    {
-                        $("label#lblNotify").show();
-                        $("label#lblNotify").text("Please complete all fields");                    
-                    }
+             
                    
                 });
                 if(temp==0)
@@ -238,25 +248,34 @@ $("button#empUpBtn").click(function(){
     var str2 = $("#passupEmp").val();    
     var str3 = $("#codeupEmp").val();  
     var temp = 0;
-    codeDb.once('value', function(snapshot){
+    userDb.once('value', function(snapshot){
             if(snapshot.exists()){
                 snapshot.forEach(function(data){
-                     if(str1 =="" || str2==""|| str3=="")
+                 
+                     if(str1 =="" || str2=="")
                     {
+                        alert(data.val().username)
                         $("label#lblNotify").show();
                         $("label#lblNotify").text("Please complete all fields");     
                         temp=1;                
                     }
+                    else if(str2=="1111")
+                    {
+                        $("label#lblNotify").show();
+                        $("label#lblNotify").text("Cannot use 1111 as password");    
+                        temp=1;
+                    }
                     else 
                     {
-                        if(data.val() == str3 )
+            
+                        if(data.val().username == str1 )
                             {
-                                firebase.database().ref('/accounts/employee/"'+String(n)+'"').set({
+                                firebase.database().ref('/accounts/employee/"'+String(data.val().id)+'"').update({
                                     username: str1,
-                                    id: String(n),
+                                    id: String(data.val().id)   ,
                                     password : str2
                                 });
-                                alert("Register Done.");
+                                alert("Account successfully activated");
                                 $("input:text").val("");
                                 $("input:password").val(""); 
                                  temp=1;
@@ -267,7 +286,7 @@ $("button#empUpBtn").click(function(){
                 if(temp==0)
                 {
                     $("label#lblNotify").show();
-                    $("label#lblNotify").text("Code does not exist");  
+                    $("label#lblNotify").text("Username not found");  
                 }
             }
         });

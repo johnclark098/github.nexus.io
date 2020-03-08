@@ -29,6 +29,11 @@ function chartDoorData()
                 var obj = snapshot.val();
                 objTemp=obj.shipmentID;
             });
+            if(num != 0)
+            {
+            $('label#refreshLabelID').hide();
+            }
+           
             dataArr = ({
                 label: objTemp,
                 value:num,

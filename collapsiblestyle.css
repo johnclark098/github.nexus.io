@@ -12,8 +12,8 @@
   }
   
   .active, .collapsible:hover {
-    background-color: #F2F2F2;
-    color: black;
+    background-color: red;
+    color: white;
     font-weight: bold;
 }
   

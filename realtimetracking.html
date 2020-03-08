@@ -98,20 +98,22 @@
  <div id=rolesContents >
   
 
+
+ 
     <div id="rolesInfo">
 
-        <div class="my-custom-scrollbar2" id="style-4">
-            <table  id="table7">
+        <div   class="my-custom-scrollbar2"id="style-4" style="height: 550px;">
+            <table  id="table7" style="height: 350px; position: relative; bottom: 50px; ">
                 <thead>
                     <tr class="header">
-                        <th onclick="sortTable4(0)" style="width:5%; ">ID</th>
-                        <th onclick="sortTable4(1)" style="width:10%;">Name</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Tracking</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Door & Shock</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Geofencing</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Notifcations</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Manage Roles</th>
-                        <th onclick="sortTable4(2)" style="width:10%;">Command</th>
+                        <th onclick="sortTable7(0)" style="width:5%; ">ID</th>
+                        <th onclick="sortTable7(1)" style="width:10%;">Name</th>
+                        <th   style="width:10%;">Tracking</th>
+                        <th   style="width:10%;">Door & Shock</th>
+                        <th  style="width:10%;">Geofencing</th>
+                        <th   style="width:10%;">Notifcations</th>
+                        <th   style="width:10%;">Manage Roles</th>
+                        <th   style="width:10%;">Command</th>
                     </tr>
                     <tr>
    
@@ -123,6 +125,24 @@
         </div>
 
     </div>
+       
+
+    <input type = text placeholder="Input employee name to add" id="addempText"
+    style="font-size: 15px; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+    padding: 5px;
+    width: 300px;
+    outline: none;
+    margin: 5px;
+    text-align: center;
+    bottom: 0;
+    position: absolute;">
+    <img src="add.jpg" onclick="addEmp()"style="width: 3.5%;
+     bottom: 0;
+     margin-bottom: 4px;
+     left: 320px;
+    position: absolute;">
 </div>
 <!-------------------------------------------------------------------------------------------------------->
 
@@ -263,7 +283,8 @@
             </div>
         </div>
     </div>
-
+    <button class="collapsible">Door Section</button>
+    <div class="content">
         <div id=doorContents>
             <h2 style=" font-size: 22px; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ; 
@@ -301,6 +322,8 @@
                         </tr>
                     </table>
               </div>
+            </div>
+        </div>  
      <!-- The Modal -->
      <div id="myModal" class="modal">
         <span class="close">&times;</span>
@@ -308,7 +331,7 @@
         <div id="caption"></div>
       </div>
     </div>  
-</div>  
+
 <!-------------------------------------------------------------------------------------------------------->
     <script>
         function startLoad()
@@ -321,13 +344,16 @@
                 location.reload(true);
             });
             employeeUpdateMain.once('value', function(snapshot) { 
+            
            if(snapshot.val().track !=1)
         
             {
               
                 $("a#nav1").hide();
-                $("div#map2").hide(10); 
-                $("div#map").hide(10); 
+                $("div#map2").hide(); 
+                $("div#map").hide(); 
+                $('div#over_map3').hide();
+                $("div#over_map").hide();  
 
             }
             if(snapshot.val().doorshock !=1)
@@ -450,13 +476,16 @@
             var map;
             var map2;
             var eventMap;
-            var cityCircle 
+            var cityCircle; 
+            var cityCircle2;
             var lngData;
             var latData;
             var distance;
             var line;
+            var line2;
             var uluru1;
             var markersArray = [];
+            var markersArray2 = [];
             var mk1;
             var mk2;
             function haversine_distance(mk1, mk2) {
@@ -587,7 +616,36 @@
                 map2.setCenter(marker2.getPosition());
                 //window.setTimeout(function() {map2.setZoom(pos);},10000);
                 }); 
+
+                deleteOverlays2();
+                if(String(data.val().radiusLat) !="0")
+                {
+                designationMarker = { lat: parseInt(data.val().radiusLat), lng: parseInt(data.val().radiusLng) };       
+              
+                cityCircle2 = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    map: map2,
+                    center: designationMarker,
+                    radius:parseInt(data.val().radius)
+                });   
+      
+                var marker = new google.maps.Marker({
+                    position: designationMarker, 
+                    map: map2
+                });
+                markersArray2.push(marker);
+                designationInfo = new google.maps.InfoWindow({
+                    content:  "Designation Place:" +data.val().place
+                });
+                line2 = new google.maps.Polyline({path: [designationMarker, uluru], map: map2});
+                designationInfo.open(map2,marker);   
+                
             }
+        }
             function eventTracker(data)
             {
                 var icon = { // car icon
@@ -607,14 +665,14 @@
                 var infowindow = new google.maps.InfoWindow({
                     content:  "ContainerID:"+String(data.val().shipmentID)
                 });
-                infowindow.open(map2,marker2);    
+                infowindow.open(eventMap,marker2);    
                 markers3[data.key] = marker2; // add marker in the markers array..
                 document.getElementById("cars").innerHTML = cars_count;
                 //ZOOM when clicked
                 google.maps.event.addListener(marker2,'click',function() {
                 var pos = map.getZoom();
-                map2.setZoom(15);
-                map2.setCenter(marker2.getPosition());
+                eventMap.setZoom(15);
+                eventMap.setCenter(marker2.getPosition());
                 //window.setTimeout(function() {map2.setZoom(pos);},10000);
                 }); 
                 deleteOverlays();
@@ -639,7 +697,7 @@
                 });
                 markersArray.push(marker);
                 designationInfo = new google.maps.InfoWindow({
-                    content:  "Designation Marker"
+                    content:  "Designation Place:" +data.val().place
                 });
                 line = new google.maps.Polyline({path: [designationMarker, uluru1], map: eventMap});
                 designationInfo.open(eventMap,marker);                          
@@ -654,12 +712,10 @@
                     distance = haversine_distance(mk1, mk2)*1.595;        
                     markersArray.push(mk1);
                     markersArray.push(mk2);
-         
-           
                     if(distance<= designationSet)
                     {
                     firebase.database().ref('/notifications/notifLoc'+data.val().shipmentID+'').set({
-                        text: "Container " + data.val().shipmentID +" is in the area" 
+                        text: "Container " + data.val().shipmentID +" is in the area of "  + data.val().place 
                     });
                      }
                 }
@@ -775,11 +831,7 @@
                     }
                 });
                 
-            var cars_Ref2 =  firebase.database().ref('/location/shipments');
-                cars_Ref2.child(x.value).once('value',  function (data) {
-                updateData(data); 
-                tempkey = data.key;
-            });
+       
             }
 //-----------------------------------for map-------------------------------//
             // get firebase database reference...

@@ -1,6 +1,9 @@
 var employee =firebase.database().ref().child('/accounts/employee/');
+var roleType =localStorage.getItem("role");
+var idType =localStorage.getItem("id");
 function readRoles()
 {
+
     var table7 = document.querySelector('#table7 tbody');
     if(table7.hasChildNodes())
     {
@@ -11,6 +14,8 @@ function readRoles()
     }
     employee.once('value', function(snapshot) { 
     snapshot.forEach(function(childSnapshot) {
+           if(roleType != "Admin" && idType !=childSnapshot.val().id)
+           {
            var content = '';
            content +='<tr id='+childSnapshot.val().id+'  >';
            content += '<td>' + String(childSnapshot.val().id)  + '</td>';
@@ -66,6 +71,7 @@ function readRoles()
            content += '<td>' +' <img src ="check.jpg" id=check'+childSnapshot.val().id+' onclick="rolesCheck(this.id)"style="border-radius: 50%; width: 20%;"> <img src ="delete.jpg" id=delete'+childSnapshot.val().id+' onclick="rolesDelete(this.id)"style="border-radius: 50%; width: 20%;">    '+ '</td>';                  
            content += '</tr>';
            $('#table7 tbody').append(content);
+        }
    });
  
 });   
@@ -169,5 +175,32 @@ function rolesCheck(clicked_id)
           employeeDelete.remove();
       
     }
+function addEmp()
+{
+ 
+    var d = new Date();
+    var n = d.getTime();
+    var idemp = n;
+    if( $("#addempText").val()!="")
+    {
+        firebase.database().ref('/accounts/employee/"'+String(idemp)+'"').set({
+            username:  $("#addempText").val(),
+            id: String(idemp),
+            doorshock: 0,
+            geo:0,
+            notif:0,
+            track:0,
+            roles:0,
+            password : "1111"
+        });
+        alert("Register Done.");
+        $("input:text").val("");
+        readRoles();
+    }
+    else
+    {
+        alert("Please input employee name");
+    }
 
+}
  

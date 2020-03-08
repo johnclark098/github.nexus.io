@@ -178,18 +178,33 @@ $(document).ready(function () {
         if(x.value == "All")
         {
           $("div#shipmentDetails").hide(100);
-     
           $("div#map2").hide(100); 
           $("div#map").show(100); 
-         
-        
           markers2[tempkey].setMap(null);
           myChart.destroy();
         }
         else
         {
+          if(tempkey != null)
+          {
+            markers2[tempkey].setMap(null);  
+          }
           $("div#over_map").hide(10); 
-          changeMap();
+          
+            var cars_Ref2 =  firebase.database().ref('/location/shipments');
+            cars_Ref2.child(x.value).once('value',  function (data) {
+            updateData(data); 
+            tempkey = data.key;
+        });
+        btnFollow();
+        $('div#barchartContents').hide();
+        $("div#over_map").hide(10); 
+        $("div#shipmentDetails").show(100);
+        $("#inventoryLabel").text(x.value);
+        chartData();
+        $("div#map2").show(); 
+        $("div#map").hide(); 
+   
         }
        
       });
@@ -205,36 +220,7 @@ $(document).ready(function () {
       $('select#rolesDropdown').on('change', function() {
          empID = $(this).children("option:selected").val().substring(0, 13);
       });
-      function changeMap()
-      {
-        if(tempkey != null)
-        {
-            markers2[tempkey].setMap(null);  
-            myChart.destroy();
-        }
-        if(x.value == "All")
-        {
-            $("div#map2").hide(); 
-            $("div#map").show();  
-        }
-        else
-        {
-            btnFollow();
-            $('div#barchartContents').hide();
-            $("div#over_map").hide(10); 
-            $("div#shipmentDetails").show(100);
-            $("#inventoryLabel").text(x.value);
-            chartData();
-            $("div#map2").show(); 
-            $("div#map").hide(); 
-            var cars_Ref2 =  firebase.database().ref('/location/shipments');
-            cars_Ref2.child(x.value).once('value',  function (data) {
-            updateData(data); 
-            tempkey = data.key; 
-            });
-        }
-        
-      }
+      
       function changeMap2()
       {
         $("#inventoryLabel").text(x.value);

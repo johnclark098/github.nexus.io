@@ -8,13 +8,9 @@
 <body id="bodyid" class="bodyclass" onload="startLoad()">
  
 
-
-
-
-
 <div id="mainid" class="mainclass"  >
     <div id="mainaID" class="mainaclass"  >
-        <label class="switch"><input type="checkbox" id="togBtn"value="on">
+        <label id ="switchButton"class="switch"><input type="checkbox" id="togBtn"value="on" hidden>
             <div class="slider round"><!--ADDED HTML -->
                 <span class="on">Sign Up</span><span class="off">Sign In</span>
                 <!--END--></div></label>
@@ -77,11 +73,11 @@
         </div> 
 
         <div id="signupEmpID" class="signupEmpClass" style="display: none;">
-            <label  class="labelAdmin"  style="position: relative; bottom: 50px;">Sign-Up For Employee</label>
+            <label  class="labelAdmin"  style="position: relative; bottom: 50px;">Employee Activation Account</label>
             <label  id="lblNotify" style="display: block; color: red;"></label>
-            <input type="text" id = "userupEmp" placeholder="Enter Username"   required>
-            <input type="password"id = "passupEmp"  placeholder="Enter Password" required>
-            <input type="text" id = "codeupEmp" placeholder="Enter Code"   required>
+            <input type="text" id = "userupEmp" placeholder="Enter Registered Username"   required>
+            <input type="password"id = "passupEmp"  placeholder="Enter New Password" required>
+            <input type="text" id = "codeupEmp" placeholder="Enter Code"   >
             <button id="empUpBtn"  class="btnDone">Done</button>
         </div> 
     </div>
@@ -152,10 +148,11 @@ input#two:checked ~ .check { transform: translate(-50px, -25px); }
     <script>
         function startLoad()
             {   
-                 
+                $("input#codeupEmp").hide();
+            $("label#switchButton").css("visibility", "hidden");
                if(localStorage.getItem("username") != null)
                {
-                window.location.href="file:///D:/Yuro/Tracker/sampleweb.github.io-master/realtimetracking.html#";
+                window.location.href="file:///D:/Yuro/tempNexus/realtimetracking.html";
                }
          
              

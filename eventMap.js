@@ -1,13 +1,7 @@
 
-function eventTrigger()
-{
-    var cars_Ref2 =  firebase.database().ref('/location/shipments');
-    cars_Ref2.child(x1.value).once('value',  function (data) {
-    eventTracker(data); 
-    tempkey2 = data.key;
-});
 
-}
+var desiglat;
+var desiglng;
 function placeMarker(location) {
     // first remove all markers if there are any
     mk1 = new google.maps.Marker({position: location, map: map});
@@ -23,7 +17,8 @@ function placeMarker(location) {
     map: eventMap,
     center:location
   });          
- 
+  desiglat=location.lat();
+  desiglng=location.lng();
     var marker = new google.maps.Marker({
         position: location, 
         map: eventMap
@@ -32,12 +27,16 @@ function placeMarker(location) {
     markersArray.push(marker);
     markersArray.push(mk1);
     markersArray.push(mk2);
-    var contentString = '<div class="iw-content"style="font-size: 22px; height:100px;">'  
-      + ' <label id="msg">'+"Distance to destination: " + distance.toFixed(2) + " km."+'</label>'
+    var contentString = '<div class="iw-content"style="font-size: 22px; height:120px;">'  
+     +' <label id="msg">'+"Distance to destination: " + distance + " km."+'</label>'
+      + ' <label>'+"Set distance and place"+'</label>'
       +'<div class="iw-content">'  
-      + ' <input  id="radiusText"type="text"style="font-size: 15px; margin:15px; border:2px solid black; text-align: center; width=80%;" placeholder="Set radius in KM"></input>' 
-     
+      + ' <input  id="radiusText"type="text"style="font-size: 15px;  margin-left 5px;border:2px solid black; text-align: center; width=80%;" placeholder="Set radius in KM"></input>' 
+      +'<br>'
+      + ' <input  id="placeText"type="text"style="font-size: 15px;  margin-left 5px;border:2px solid black; text-align: center; width=80%;" placeholder="Set name of the place"></input>' 
+      +'<br>'
       + ' <button onclick="changeRadius()" id="btn">Save</button>'  
+      + ' <button onclick="closeInfo()" id="btnclose">Cancel</button>'  
       +'</div>' 
         +'</div>' ;
       // + '<p>455 street</p>' + '<p>City, World</p>' + '<p>Canada, Postalcode</p>' + '</div>'
@@ -53,27 +52,29 @@ function changeRadius()
 {
   var radiusSet = parseInt($("input#radiusText").val()) * 1000
   cityCircle.setRadius(radiusSet);
-  if(distance<= parseInt($("input#radiusText").val()))
-  {
-    alert("Shipment is on the area");
-  }
+  //if(distance<= parseInt($("input#radiusText").val()))
+  //{
+ //   alert("Shipment is on the area");
+ // }
 
-  if($("input#radiusText").val() != "" )
+  if($("input#radiusText").val() != "" && $("input#placeText").val() != "" )
   {
       firebase.database().ref('/location/shipments/'+x1.value+'').update({
           radius: String(radiusSet),
-          radiusLat:String(cityCircle.getCenter().lat()),
-          radiusLng:String(cityCircle.getCenter().lng())
+          radiusLat:String(desiglat),
+          radiusLng:String(desiglng),
+          place:String( $("input#placeText").val())
       });
-      alert("Assigning designation done");
- 
-       
+      alert("Assigning designation done");   
+  }
+  else
+  {
+    alert("Please complete all fields");
   }
 }
-function close()
+function closeInfo()
 {
-    deleteOverlays();
-    infowindow.open(eventMap,marker); 
+  eventTrigger();
 }
 // Deletes all markers in the array by removing references to them
 function deleteOverlays() {
@@ -85,4 +86,24 @@ function deleteOverlays() {
         }
     markersArray.length = 0;
     }
+}
+
+function deleteOverlays2() {
+  if (markersArray2) {
+      for (i in markersArray2) {
+          cityCircle2.setMap(null);
+          markersArray2[i].setMap(null);
+          line2.setMap(null);
+      }
+  markersArray2.length = 0;
+  }
+}
+
+function eventTrigger()
+{
+    var cars_Ref2 =  firebase.database().ref('/location/shipments');
+    cars_Ref2.child(x1.value).once('value',  function (data) {
+    eventTracker(data); 
+    tempkey2 = data.key;
+});
 }
