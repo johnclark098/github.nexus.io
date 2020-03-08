@@ -137,7 +137,7 @@ $(document).ready(function(){
                             localStorage.setItem("roles","1");
                             localStorage.setItem("id","1");
                             localStorage.setItem("username",data.val().username);
-                            window.location.href="file:///D:/Yuro/tempNexus/realtimetracking.html"; 
+                            window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
                             temp=1;
                         }
                         else if(str1 =="" || str2=="")
@@ -227,7 +227,7 @@ $(document).ready(function(){
                         localStorage.setItem("id",data.val().id);
                         localStorage.setItem("username",data.val().username);
                         localStorage.setItem("role","Employee");
-                        window.location.href="file:///D:/Yuro/tempNexus/realtimetracking.html"; 
+                        window.location.href="https://johnclark098.github.io/sampleweb.github.io/realtimetracking"; 
                         temp=1;
                     }   
              
