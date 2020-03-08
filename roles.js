@@ -14,7 +14,7 @@ function readRoles()
     }
     employee.once('value', function(snapshot) { 
     snapshot.forEach(function(childSnapshot) {
-           if(roleType != "Admin" && idType !=childSnapshot.val().id)
+           if(roleType == "Admin" ||( roleType == "Employee" && idType != childSnapshot.val().id))
            {
            var content = '';
            content +='<tr id='+childSnapshot.val().id+'  >';
