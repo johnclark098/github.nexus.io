@@ -193,7 +193,7 @@ function addEmp()
             roles:0,
             password : "1111"
         });
-        alert("Register Done.");
+        alert("Employee account created.\nPlease advised to activate the account by changing the password.");
         $("input:text").val("");
         readRoles();
     }
