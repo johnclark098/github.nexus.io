@@ -37,6 +37,12 @@ $(document).ready(function () {
             $("div#productContents").hide(400);
           }
     })
+
+        
+    $("img#refreshButton").click(function(){
+       
+      graphData();
+  })
     
       $("a#back").click(function(){
         $("div#shipmentDetails").hide(100);

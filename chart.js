@@ -15,7 +15,7 @@ function chartData()
     // initialize Global variables
     var dataArr = [];
     var compareVal ='';
-    var ref = firebase.database().ref("/shipmentsTable/monitoringShipments").orderByChild("cTime");
+    var ref = firebase.database().ref("/shipmentsTable/monitoringShipments/"+x.value+"").orderByChild("cTime");
     // Get data function reads the firebase database. Order the data by Child of key foodAndDrinks
     // It then traverses each value in the firebase and 
     // for each record compares if the current value and previous value are same cuisine increments by 1 
@@ -27,13 +27,10 @@ function chartData()
     function getData() {
         ref.on("child_added", function (snapshot) {
             var obj = snapshot.val();
-            
-                if(x.value == obj.aShipmentID)
-                {
-                    dataArr = ({
-                        label: obj.dCelsius,
-                        value: obj.cTime,
-                    });
+            dataArr = ({
+                label: obj.dCelsius,
+                value: obj.cTime,
+            });
           // Verify that values are defined and push data into the chart    
             if(typeof dataArr.label !== 'undefined' && typeof dataArr.value !=='undefined'){
                if(dataArr.label !== compareVal){
@@ -43,7 +40,7 @@ function chartData()
             // var unique = $.makeArray($(dataArr).filter(function(i,itm){
             //     return i == $(dataArr).index(itm);
             // })); 
-        }
+        
         });
     }
 
@@ -61,30 +58,22 @@ function chartData()
     options = {
         scales: {
             xAxes: [{
-                barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2,
-                gridLines: {
-                    offsetGridLines: true
-                },
-                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true
+                    }
+                }],
+            yAxes: [{
+                    display: true,
                     ticks: {
-                        min: 0,
-                        max: 100,
-                        stepSize: 10
+                        beginAtZero: true,
+                        steps: 10,
+                        stepValue: 5,
+                        max: 100
                     }
                 }]
-            }],
-            layout: {
-                padding: {
-                    left: 50,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
-                }
-            }
-        }
+        },
+        
     }
     // Set the configuration of the Chart elements.
     // This is where we pass the data we captured from firebase to the chart label and data
@@ -94,10 +83,10 @@ function chartData()
             labels: dataArr.label,       // value of label retrieved from firebase
             datasets: [{
                 label: "Temperature Graph",
-                backgroundColor: "rgb(255, 159, 64)",
-                borderColor: "rgba(54, 162, 235, 1)",
-                borderWidth: 1,
-                data: dataArr.value     // value of search for each of the array elements
+                backgroundColor: "red",
+                borderColor: "navy",
+                borderWidth: 1
+                //,data: dataArr.value     // value of search for each of the array elements
             }],
             responsive: true,
             options: options

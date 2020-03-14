@@ -88,6 +88,18 @@
         }
     
         .notifContent:hover { background-color: darkgray; }
+
+
+        .textImage
+        {
+
+          width:40px;
+          border-radius: 100%; 
+          background-color: white; 
+          position: relative;
+          margin-left: 15px; 
+   
+        }
         .notifImage
         {
      

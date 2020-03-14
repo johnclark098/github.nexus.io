@@ -23,6 +23,9 @@ function placeMarker(location) {
         position: location, 
         map: eventMap
     });
+
+    alert(desiglat);
+    alert(desiglng);
     // add marker in markers array
     markersArray.push(marker);
     markersArray.push(mk1);
@@ -60,9 +63,9 @@ function changeRadius()
   if($("input#radiusText").val() != "" && $("input#placeText").val() != "" )
   {
       firebase.database().ref('/location/shipments/'+x1.value+'').update({
-          radius: String(radiusSet),
-          radiusLat:String(desiglat),
-          radiusLng:String(desiglng),
+          radius: radiusSet,
+          radiusLat:desiglat,
+          radiusLng:desiglng,
           place:String( $("input#placeText").val())
       });
       alert("Assigning designation done");   

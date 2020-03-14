@@ -80,7 +80,7 @@
         text-align: left; 
         color: black;">Door Occurence Graph</h2>
     <label id="refreshLabelID" class="refreshLabel2">Refresh to update new data</label>
-    <img src ="tracker.jpg" id=refreshButton  onclick="graphData()">
+    <img src ="tracker.jpg" id=refreshButton >
 
     <canvas id="doorChart" width="800" height="450"></canvas>
     <h2 style=" font-size: 22px; 
@@ -188,7 +188,7 @@
             <ul id= "list">
             </ul>
             <input type="text" id="myInput4" type="text" onkeyup="filterTable4()" placeholder="Find data. . ." />
-                <div class="my-custom-scrollbar2" id="style-4">
+                <div class="my-custom-scrollbar2" style="height: 250px;" id="style-4">
                     <table  id="table4">
                         <thead>
                             <tr class="header">
@@ -217,7 +217,7 @@
             <ul id= "list">
             </ul>
             <input type="text" id="myInput3" type="text" onkeyup="filterTable3()" placeholder="Find data. . ." />
-              <div class="my-custom-scrollbar" id="style-4">
+              <div class="my-custom-scrollbar2" style="height: 250px;" id="style-4">
                   <table  id="table3">
                         <thead>
                             <tr class="header">
@@ -251,8 +251,8 @@
             <ul id= "list">
             </ul>
             <input type="text" id="myInput5" type="text" onkeyup="filterTable5()" placeholder="Find data. . ." />
-              <div class="my-custom-scrollbar" id="style-4">
-                  <table  id="table5">
+            <div class="my-custom-scrollbar2" style="height: 250px;" id="style-4">
+                <table  id="table5">
                         <thead>
                             <tr class="header">
                                 <th onclick="sortTable5(0)" style="width:5%; ">Occurence</th>
@@ -294,8 +294,8 @@
             <ul id= "list">
             </ul>
             <input type="text" id="myInput6" type="text" onkeyup="filterTable6()" placeholder="Find data. . ." />
-              <div class="my-custom-scrollbar" id="style-4">
-                  <table  id="table6">
+            <div class="my-custom-scrollbar2" style="height: 250px;" id="style-4">
+                <table  id="table6">
                         <thead>
                                 <tr class="header">
                                     <th onclick="sortTable6(0)" style="width:5%; ">Occurence</th>
@@ -396,7 +396,7 @@
           
             if(localStorage.getItem("role") == null)
             {
-              window.location.href="https://johnclark098.github.io/sampleweb.github.io/login";     
+              window.location.href="file:///D:/Yuro/tempNexus/login.html";     
             }
             $("label#accountlist").text(localStorage.getItem("role"));    
             if(localStorage.getItem("username").length >=11)
@@ -495,7 +495,7 @@
                 var difflat = rlat2-rlat1; // Radian difference (latitudes)
                 var difflon = (mk2.position.lng()-mk1.position.lng()) * (Math.PI/180); // Radian difference (longitudes)
                 var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)+Math.cos(rlat1)*Math.cos(rlat2)*Math.sin(difflon/2)*Math.sin(difflon/2)));
-                return d;
+                  return d;
                 }
             function initMap() { // Google Map Initialization... 
                 map = new google.maps.Map(document.getElementById('map'), {
@@ -678,7 +678,7 @@
                 deleteOverlays();
                 if(String(data.val().radiusLat) !="0")
                 {
-                designationMarker = { lat: parseInt(data.val().radiusLat), lng: parseInt(data.val().radiusLng) };       
+                designationMarker = { lat: data.val().radiusLat, lng: data.val().radiusLng };       
               
                 cityCircle = new google.maps.Circle({
                     strokeColor: '#FF0000',
@@ -702,6 +702,7 @@
                 line = new google.maps.Polyline({path: [designationMarker, uluru1], map: eventMap});
                 designationInfo.open(eventMap,marker);                          
             }
+            /*
             if(String(data.val().radius) !="0")
                 {
                     designationSet= (parseInt(data.val().radius) / 1010);
@@ -712,13 +713,17 @@
                     distance = haversine_distance(mk1, mk2)*1.595;        
                     markersArray.push(mk1);
                     markersArray.push(mk2);
+                 
                     if(distance<= designationSet)
                     {
                     firebase.database().ref('/notifications/notifLoc'+data.val().shipmentID+'').set({
                         text: "Container " + data.val().shipmentID +" is in the area of "  + data.val().place 
                     });
+            
                      }
+     
                 }
+                */
             }
             function btnFollow()
                 { 
@@ -728,8 +733,8 @@
                 var table5 = document.querySelector('#table5 tbody');
                 var table6 = document.querySelector('#table6 tbody');
                 var shipmentsTable3 = firebase.database().ref()
-                .child("/shipmentsTable/monitoringShipments");
-                var productTable4 = firebase.database().ref().child("shipmentsProducts");
+                .child("/shipmentsTable/monitoringShipments/"+x.value+"/");
+                var productTable4 = firebase.database().ref().child("shipmentsProducts/"+x.value+"/");
                 var shockTable5 = firebase.database().ref().child("shockTable/"+x.value+"/");
                 var doorTable6 = firebase.database().ref().child("doorTable/"+x.value+"/");
                 shipmentsTable3.on('value', function(snapshot){
@@ -762,7 +767,7 @@
                         table4.removeChild(table4.firstChild);
                     }
                     if(snapshot.exists()){
-                     
+                 
                         var content = '';
                         snapshot.forEach(function(data){
                             var val = data.val();
@@ -771,7 +776,14 @@
                             content +='<tr>';
                             content += '<td>' + val.aShipmentID + '</td>';
                             content += '<td>' + val.bProdId + '</td>';
-                            content += '<td>' + val.cProdDesc + '</td>';
+                            if(val.cProdDesc == "Blank")
+                            {
+                            content += '<td>' + '<input type="text" id= text'+val.id+' style="text-align:center;" placeholder="Input product"><img  src="check.jpg" class="textImage" id='+val.id+' onclick=temphi3(this.id)></td>';
+                            }
+                            else
+                            {
+                            content += '<td>' + val.cProdDesc + '</td>'; 
+                            }
                             content += '<td>' + val.lat + '</td>';
                             content += '<td>' + val.lng + '</td>';
                             content += '</tr>';
@@ -799,7 +811,7 @@
                             content += '<td>' + val.time + '</td>';
                             content += '<td>' + String(val.lat) + '</td>';
                             content += '<td>' + String(val.lng) + '</td>';
-                            content += '<td>' + "<a href="+ "#!" + "onclick="+"temphi2(this.id)"+" id="+val.imageID+">" + "View Images"+ "</a>"+ '</td>';
+                            content += '<td>' + "<a href="+ "#!" + " onclick="+"temphi2(this.id)"+" id="+val.imageID+">" + "View Images"+ "</a>"+ '</td>';
                             content += '</tr>';
                         }
                         });
@@ -881,6 +893,7 @@
          
 
             function temphi (clicked_id) {
+                alert(clicked_id);
                 var tableImage = document.querySelector('#List tr');
                 while(tableImage.hasChildNodes()) {
                     tableImage.removeChild(tableImage.firstChild);
@@ -901,14 +914,14 @@
                     console.log(url);
                     let new_html = '';
                     new_html +='<td >';
-                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px" alt=" '+ row + '">';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px" alt=" '+ row + '"onclick=temphi4(this.id)>';
                     new_html +='</td>';
                     $('#List').find('tr').append(new_html);
                     });
                 }
              }
 
-             function temphi2 (clicked_id) {
+             function temphi2 (clicked_id) { 
                 var tableImage3 = document.querySelector('#List3 tr');
                 while(tableImage3.hasChildNodes()) {
                     tableImage3.removeChild(tableImage3.firstChild);
@@ -932,19 +945,30 @@
                     console.log(url);
                     let new_html = '';
                     new_html +='<td >';
-                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px"alt=" '+ row + '">';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px"alt=" '+ row + '"onclick=temphi4(this.id)>';
                     new_html +='</td>';
                     $('#List3').find('tr').append(new_html);
                     });
                 }
              }
+             function temphi3(clicked_id)
+             {
+                var inputText = document.getElementById("text"+clicked_id+"").value;
+                
+                var prodUpdate =firebase.database().ref().child('/shipmentsProducts/'+x.value+'/'+clicked_id+'');
+                prodUpdate.update({
+                cProdDesc: inputText
+                 });
+                 alert("Product Updated")
+                }
         </script>
      <script>
-         var changeimage = firebase.database().ref().child("startCam/"+x.value+"/");
-         var tableImage2 = document.querySelector('#List2 tr');
+           
         
             function startCam ()
             {
+                var changeimage = firebase.database().ref().child("startCam/"+x.value+"/");
+                var tableImage2 = document.querySelector('#List2 tr');
                 var tempchange= 0;
                 firebase.database().ref().child("startCam/"+x.value+"/").set({
                 start: "1" 
@@ -953,9 +977,11 @@
             $("label#lblsnapshot").show(); 
             $("Table#List2").hide(); 
             document.getElementById("stopBtn").disabled = true;
-            changeimage.on('child_changed', function (data) {
-                if(data.val().start == "0" && tempchange =="0")
+            changeimage.on('value', function (data) {
+        
+                if(data.val().start == "0" && tempchange ==0)
                 {
+                   
                  tempchange =1;
                  document.getElementById("stopBtn").disabled = false;
                 $("table#List2").show(); 
@@ -978,7 +1004,7 @@
                     console.log(url);
                     let new_html = '';
                     new_html +='<td >';
-                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px" alt=" '+ row+ '">';
+                    new_html +='<img src="'+url+'" id="image '+ row + '" width = "300px" height = "400px" alt=" '+ row+ '"onclick=temphi4(this.id)>';
                     new_html +='</td>';
                     $('#List2').find('tr').append(new_html);
                     });
@@ -990,11 +1016,13 @@
          
             function deleteall()
             {
+                var changeimage = firebase.database().ref().child("startCam/"+x.value+"/");
+         var tableImage2 = document.querySelector('#List2 tr');
+                alert("Images deleted")
                 while(tableImage2.hasChildNodes()) {
                     tableImage2.removeChild(tableImage2.firstChild);
                     }
                 var storageRef = storage.ref('snapshots/');
-              alert("Images deleted")
     
               storageRef.listAll().then(function(res) {
               res.items.forEach(function(itemRef) {
@@ -1005,12 +1033,15 @@
             
               });
               });
+
+            
             }
  
     </script>
     <script>
-               $(document).on('click','img',function(){
-                 var id = $(this).attr('id');
+        function temphi4(clicked_id)
+        {
+            var id =clicked_id;
                  // Get the modal
                  var modal = document.getElementById("myModal");
                   // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -1028,7 +1059,8 @@
                     span.onclick = function() { 
                     modal.style.display = "none";
                 }
-             })
+        }
+       
     </script>
     <script>
         var coll = document.getElementsByClassName("collapsible");
